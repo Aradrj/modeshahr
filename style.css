@@ -1,0 +1,2496 @@
+/* ==========================================================================
+   تنظیمات پایه، پس‌زمینه #EFE9DF و مقیاس‌پذیری سیال CSS (dvh / aspect-ratio / clamp)
+   سازگار با تمام دیوایس‌ها بدون بریدگی پایین صفحه و بدون تداخل بخش‌ها
+   ========================================================================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  height: 100dvh;
+  background-color: #EFE9DF;
+  color: #1F2D2B;
+  font-family: 'Vazirmatn', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+  user-select: none;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/* ==========================================================================
+   نوار ناوبری بالا (Navigation Bar) با لوگوی رسمی MODESHAHR
+   ========================================================================== */
+.site-navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 54px;
+  z-index: 60;
+  background: rgba(239, 233, 223, 0.94);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(24, 90, 89, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 clamp(0.75rem, 2.5vw, 2.2rem);
+}
+
+.navbar-inner {
+  width: 100%;
+  max-width: 1360px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.navbar-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  color: #182422;
+  padding: 0.2rem 0;
+  flex-shrink: 0;
+}
+
+.navbar-logo-img {
+  width: 34px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.navbar-brand-text {
+  font-size: clamp(0.88rem, 1.2vw, 1.02rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  direction: ltr;
+}
+
+.navbar-links {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  list-style: none;
+  overflow-x: auto;
+  scrollbar-width: none;
+  touch-action: pan-x;
+}
+
+.navbar-links::-webkit-scrollbar {
+  display: none;
+}
+
+.nav-step-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: 999px;
+  padding: 0.28rem 0.72rem;
+  font-family: inherit;
+  font-size: clamp(0.7rem, 0.95vw, 0.79rem);
+  font-weight: 600;
+  color: #425451;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.22s ease;
+}
+
+.nav-step-btn:hover {
+  color: #185A59;
+  background-color: rgba(24, 90, 89, 0.08);
+}
+
+.nav-step-btn.active {
+  color: #EFE9DF;
+  background-color: #185A59;
+  border-color: rgba(212, 175, 55, 0.65);
+  box-shadow: 0 2px 8px rgba(24, 90, 89, 0.24);
+}
+
+.navbar-meta-group {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-shrink: 0;
+}
+
+.navbar-step-badge {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #185A59;
+  background-color: rgba(212, 175, 55, 0.18);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  direction: ltr;
+}
+
+/* ==========================================================================
+   ویوپورت اصلی با ارتفاع داینامیک 100dvh و پس‌زمینه #EFE9DF (بدون سفیدی یا پرش)
+   ========================================================================== */
+.scrolly-viewport {
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  background-color: #EFE9DF;
+  position: relative;
+  overflow: hidden;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  touch-action: none;
+}
+
+.aspect-stage-canvas {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  background-color: #EFE9DF;
+}
+
+/* ==========================================================================
+   جهان عمودی پیوسته مختص هیرو و خط طلایی آغازین
+   ========================================================================== */
+.scrolly-world {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.continuous-line-layer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 460%;
+  pointer-events: none;
+  z-index: 2; /* قرار گرفتن زیر نوشته‌های هیرو */
+}
+
+.wave-svg {
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+  display: block;
+}
+
+.gold-wave-base {
+  fill: none;
+  stroke: #D4AF37;
+  stroke-width: 3.3;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.shine-segment {
+  fill: none;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.gold-tip-trail {
+  fill: none;
+  stroke: #FFFDF5;
+  stroke-width: 4.4;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#shinyTipGlow);
+  opacity: 0.96;
+}
+
+.world-section {
+  width: 100%;
+  position: relative;
+  z-index: 5; /* نوشته‌های هیرو روی خط طلایی قرار می‌گیرند */
+}
+
+/* بخش ۰: هیرو */
+.hero-section {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.hero-box {
+  width: 100%;
+  height: 92%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: clamp(4.2rem, 8dvh, 6rem) 1.5rem 0;
+  text-align: center;
+}
+
+.hero-content {
+  margin: auto 0;
+  max-width: 760px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.55rem, 1.5dvh, 1rem);
+  background-color: rgba(239, 233, 223, 0.85);
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+}
+
+.hero-logo-frame {
+  width: clamp(235px, 30vh, 320px);
+  height: calc(clamp(235px, 30vh, 320px) * 0.827);
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 4px;
+  filter: drop-shadow(0 16px 34px rgba(0, 0, 0, 0.25));
+}
+
+.hero-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.brand-badge {
+  font-size: clamp(0.7rem, 1.2vw, 0.88rem);
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  color: #185A59;
+  text-transform: uppercase;
+  direction: ltr;
+}
+
+.hero-title {
+  font-size: clamp(2.3rem, 6vw, 4.6rem);
+  font-weight: 800;
+  color: #182422;
+  line-height: 1.08;
+  letter-spacing: 0.08em;
+  direction: ltr;
+}
+
+.hero-subtitle {
+  font-size: clamp(0.95rem, 1.8vw, 1.28rem);
+  font-weight: 500;
+  color: #354744;
+  line-height: 1.7;
+  max-width: 600px;
+}
+
+.hero-bottom-anchor {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.scroll-hint {
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: #6E7F7C;
+}
+
+.hero-start-seed {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #D4AF37;
+  box-shadow: 0 0 10px rgba(212, 175, 55, 0.85);
+  will-change: transform, opacity;
+}
+
+.line-only-section {
+  height: 360%;
+  width: 100%;
+}
+
+/* ==========================================================================
+   لایه صحنه‌های چسبان با مارجین پایین کافی و قرار گرفتن خط طلایی زیر نوشته‌ها
+   ========================================================================== */
+.stationary-explanations-layer {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* هر صحنه دارای مارجین/پدینگ پایین سخاوتمندانه (حداقل 18dvh فضای باز در پایین صفحه) است تا پایین شکل، انتهای خط طلایی و پیش‌نمایش شکل بعدی کاملاً دیده شوند و هرگز روی هم نیفتند */
+.stage-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 62px clamp(1rem, 3.2vw, 3rem) clamp(90px, 16dvh, 145px);
+  pointer-events: none;
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* خط طلایی دارای z-index: 1 است تا زیر سرفصل‌ها و نوشته‌های سایت (z-index: 6) قرار بگیرد و هرگز روی متن‌ها نیفتد */
+.stage-perimeter-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: visible;
+}
+
+/* سرفصل‌های خارج و بالای شکل: دارای z-index: 6 و پس‌زمینه هم‌رنگ صفحه (#EFE9DF) تا خط طلایی از زیر نوشته‌ها رد شود و اوورلپ نکند */
+.outside-section-header {
+  position: relative;
+  z-index: 6;
+  background-color: #EFE9DF;
+  padding: 4px 20px;
+  border-radius: 999px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  gap: 2px;
+  margin-bottom: clamp(8px, 1.4dvh, 14px);
+  flex-shrink: 0;
+}
+
+.outside-en-heading {
+  font-size: clamp(0.66rem, 1vw, 0.8rem);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  color: #185A59;
+  text-transform: uppercase;
+  direction: ltr;
+}
+
+.outside-fa-heading {
+  font-size: clamp(0.95rem, 1.55vw, 1.3rem);
+  font-weight: 800;
+  color: #182422;
+  line-height: 1.25;
+}
+
+/* چیدمان تطبیقی با حفظ نسبت‌ها در تمام دیوایس‌ها و مارجین پایین کافی */
+.explanation-mold {
+  position: relative;
+  z-index: 4;
+  direction: ltr;
+  width: min(92vw, 1240px);
+  height: min(62dvh, 490px);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) clamp(20px, 2.4vw, 38px) minmax(0, 1fr);
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform-origin: center center;
+  will-change: transform, opacity;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   سمت چپ: ۴ شکل با حفظ نسبت ابعاد (aspect-ratio) و عمق سه‌بعدی در تمام دیوایس‌ها
+   ========================================================================== */
+.left-arch-column {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1200px;
+}
+
+/* استفاده از قابلیت استاندارد aspect-ratio و max-height: 100% در CSS تا شکل در هر دیوایسی (موبایل، تبلت، دسکتاپ) نسبت ابعادی خود را حفظ کند و هرگز کشیده یا له نشود */
+.arch-mold-outer {
+  height: 100%;
+  max-height: 100%;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 1.08 / 1;
+  position: relative;
+  transform-style: preserve-3d;
+  overflow: hidden;
+  background: linear-gradient(145deg, #D5CFC2 0%, #E7E1D5 55%, #F6F2EA 100%);
+  box-shadow:
+    0 6px 20px rgba(15, 45, 43, 0.12),
+    0 2px 0 rgba(255, 255, 255, 0.88);
+}
+
+/* شکل ۱ (Stage 0): طاقچه کلاسیک */
+.arch-mold-outer.shape-variant-arch {
+  border-radius: 999px 999px 24px 24px;
+}
+
+/* شکل ۲ (Stage 1): هشت‌ضلعی پهن (Wide Octagon) مطابق تصویر 1000088107.jpg */
+.arch-mold-outer.shape-variant-octagon {
+  clip-path: polygon(
+    18% 0%,
+    82% 0%,
+    100% 18%,
+    100% 82%,
+    82% 100%,
+    18% 100%,
+    0% 82%,
+    0% 18%
+  );
+}
+
+/* شکل ۳ (Stage 2): قطره اشک (Teardrop) مطابق تصویر 1000088108.jpg */
+.arch-mold-outer.shape-variant-teardrop {
+  clip-path: polygon(
+    50.0% 0.0%,
+    56.5% 5.8%,
+    63.2% 12.0%,
+    70.0% 18.6%,
+    76.6% 25.5%,
+    82.8% 32.8%,
+    88.2% 40.2%,
+    92.6% 47.8%,
+    95.6% 55.4%,
+    97.0% 63.0%,
+    96.6% 70.4%,
+    94.4% 77.5%,
+    90.5% 84.0%,
+    85.0% 89.6%,
+    78.0% 94.2%,
+    69.6% 97.5%,
+    60.2% 99.4%,
+    50.0% 100.0%,
+    39.8% 99.4%,
+    30.4% 97.5%,
+    22.0% 94.2%,
+    15.0% 89.6%,
+    9.5% 84.0%,
+    5.6% 77.5%,
+    3.4% 70.4%,
+    3.0% 63.0%,
+    4.4% 55.4%,
+    7.4% 47.8%,
+    11.8% 40.2%,
+    17.2% 32.8%,
+    23.4% 25.5%,
+    30.0% 18.6%,
+    36.8% 12.0%,
+    43.5% 5.8%
+  );
+}
+
+/* شکل ۴ (Stage 3): ستاره / لوزی چهارپر (Star / Diamond) مطابق تصویر 1000088109.jpg */
+.arch-mold-outer.shape-variant-star {
+  clip-path: polygon(
+    50% 0%,
+    73% 27%,
+    100% 50%,
+    73% 73%,
+    50% 100%,
+    27% 73%,
+    0% 50%,
+    27% 27%
+  );
+}
+
+/* لایه‌های پله‌ای سه‌بعدی (3D Inward Sunken Walls) */
+.arch-inward-wall {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  clip-path: inherit;
+  pointer-events: none;
+  will-change: transform, inset, opacity;
+}
+
+.wall-layer-1 {
+  inset: 6px;
+  z-index: 1;
+  background: linear-gradient(140deg, #B8B2A5 0%, #D5CFC2 48%, #F4EFE6 100%);
+  box-shadow:
+    inset 12px 16px 24px rgba(8, 32, 31, 0.38),
+    inset -8px -8px 16px rgba(255, 255, 255, 0.85);
+}
+
+.wall-layer-2 {
+  inset: 12px;
+  z-index: 2;
+  background: linear-gradient(140deg, #9E988B 0%, #C2BCB0 52%, #EAE4DA 100%);
+  box-shadow:
+    inset 16px 22px 30px rgba(6, 26, 25, 0.48),
+    inset -8px -8px 18px rgba(255, 255, 255, 0.68);
+}
+
+.wall-layer-3 {
+  inset: 18px;
+  z-index: 3;
+  background: linear-gradient(140deg, #827D71 0%, #ABA598 58%, #DCD6CA 100%);
+  box-shadow:
+    inset 20px 28px 38px rgba(4, 20, 19, 0.6),
+    inset -10px -10px 20px rgba(255, 255, 255, 0.5);
+}
+
+/* حفره داخلی فرورفته با سایه حجمی قوی */
+.arch-inner-cavity {
+  direction: rtl;
+  position: absolute;
+  inset: 18px;
+  border-radius: inherit;
+  clip-path: inherit;
+  z-index: 4;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(1.4rem, 3.6dvh, 2.2rem) clamp(1.1rem, 2vw, 1.9rem) clamp(0.8rem, 1.8dvh, 1.3rem);
+  opacity: 0;
+  will-change: opacity, transform;
+}
+
+.shape-variant-octagon .arch-inner-cavity {
+  padding: clamp(1.3rem, 3.2dvh, 2rem) clamp(1.4rem, 2.5vw, 2.4rem) clamp(0.9rem, 2dvh, 1.4rem);
+}
+
+.shape-variant-teardrop .arch-inner-cavity {
+  padding: clamp(2.6rem, 6.5dvh, 4.2rem) clamp(1.8rem, 3.4vw, 3.1rem) clamp(1rem, 2.4dvh, 1.7rem);
+}
+
+.shape-variant-star .arch-inner-cavity {
+  padding: clamp(2.4rem, 6dvh, 3.8rem) clamp(2.4rem, 4.4vw, 4.1rem) clamp(1.8rem, 4.2dvh, 2.8rem);
+}
+
+.arch-spectrum-fill {
+  position: absolute;
+  inset: 0;
+  background-color: #185A59;
+  z-index: 1;
+  will-change: background-color;
+}
+
+.arch-inner-shadow-overlay {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  clip-path: inherit;
+  z-index: 2;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 65% 72%, rgba(255, 255, 255, 0.12) 0%, transparent 52%),
+    linear-gradient(135deg, rgba(2, 14, 13, 0.62) 0%, rgba(2, 14, 13, 0.22) 28%, transparent 58%, rgba(255, 255, 255, 0.14) 100%),
+    radial-gradient(closest-side at 50% 50%, transparent 74%, rgba(2, 12, 11, 0.55) 100%);
+  box-shadow:
+    inset 0 28px 48px rgba(3, 16, 15, 0.72),
+    inset 18px 0 32px rgba(3, 16, 15, 0.48),
+    inset -10px -12px 24px rgba(255, 255, 255, 0.16),
+    inset 0 3px 9px rgba(0, 0, 0, 0.62);
+}
+
+.semicircle-dome-crest {
+  position: relative;
+  z-index: 3;
+  align-self: center;
+  margin-bottom: 0.35rem;
+  padding: 0.16rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.14);
+  border: 1px solid rgba(212, 175, 55, 0.52);
+  font-size: clamp(0.6rem, 0.85vw, 0.68rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  direction: ltr;
+  flex-shrink: 0;
+}
+
+.arch-texts-stack {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  align-items: center;
+}
+
+.arch-text-item {
+  width: 100%;
+  max-height: 100%;
+  overflow-y: auto;
+  scrollbar-width: none;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: calc(0.42rem * var(--fit, 1));
+  text-align: right;
+  touch-action: pan-y;
+  will-change: color, opacity, transform;
+}
+
+/* وسط‌چینی امن: اگر متن بلندتر از قاب شد از بالا بریده نشود و قابل اسکرول باشد */
+.arch-text-item > :first-child {
+  margin-top: auto;
+}
+
+.arch-text-item > :last-child {
+  margin-bottom: auto;
+}
+
+.arch-text-item::-webkit-scrollbar {
+  display: none;
+}
+
+.arch-text-overlay {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.arch-step-label {
+  font-size: calc(clamp(0.66rem, 0.9vw, 0.75rem) * var(--fit, 1));
+  font-weight: 700;
+  color: #D4AF37;
+  letter-spacing: 0.04em;
+}
+
+.arch-heading {
+  font-size: calc(clamp(0.92rem, 1.38vw, 1.2rem) * var(--fit, 1));
+  font-weight: 800;
+  line-height: 1.34;
+}
+
+.arch-placeholder-text {
+  font-size: calc(clamp(0.72rem, 0.92vw, 0.84rem) * var(--fit, 1));
+  line-height: calc(1.62 - (1 - var(--fit, 1)) * 0.55);
+  opacity: 0.96;
+  text-align: justify;
+}
+
+.arch-sub-block {
+  background: rgba(0, 0, 0, 0.18);
+  border-right: 3px solid #D4AF37;
+  border-radius: 8px;
+  padding: 0.35rem 0.65rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.arch-sub-title {
+  font-size: calc(clamp(0.76rem, 1vw, 0.88rem) * var(--fit, 1));
+  font-weight: 800;
+  color: #F6E59B;
+}
+
+.arch-bullet-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.25rem 0.5rem;
+  margin-top: 0.15rem;
+}
+
+.arch-bullet-list li {
+  font-size: calc(clamp(0.68rem, 0.86vw, 0.78rem) * var(--fit, 1));
+  line-height: 1.4;
+  position: relative;
+  padding-right: 0.75rem;
+}
+
+.arch-bullet-list li::before {
+  content: '✦';
+  position: absolute;
+  right: 0;
+  top: 0;
+  color: #D4AF37;
+  font-size: 0.64rem;
+}
+
+.mold-center-gap {
+  width: 100%;
+  height: 100%;
+}
+
+/* ==========================================================================
+   سمت راست: ۳ قاب عکس با حفظ نسبت ابعاد (aspect-ratio) در تمام دیوایس‌ها
+   ========================================================================== */
+.right-fibo-column {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.fibo-fixed-mold {
+  direction: rtl;
+  height: 100%;
+  max-height: 100%;
+  width: 100%;
+  max-width: 100%;
+  aspect-ratio: 1.08 / 1;
+  display: grid;
+  gap: clamp(10px, 1.1vw, 15px);
+}
+
+/* چیدمان عکس بخش ۱ (Stage 0) */
+.gallery-layout-0 {
+  grid-template-columns: 1.55fr 1fr;
+  grid-template-rows: 1.55fr 1fr;
+}
+.gallery-layout-0 .fibo-item-1 {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+.gallery-layout-0 .fibo-item-2 {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+.gallery-layout-0 .fibo-item-3 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+/* چیدمان عکس بخش ۲ (Stage 1) */
+.gallery-layout-1 {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1.25fr 1fr;
+}
+.gallery-layout-1 .fibo-item-1 {
+  grid-column: 1 / 3;
+  grid-row: 1 / 2;
+}
+.gallery-layout-1 .fibo-item-2 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+.gallery-layout-1 .fibo-item-3 {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+/* چیدمان عکس بخش ۳ (Stage 2) */
+.gallery-layout-2 {
+  grid-template-columns: 1fr 1.45fr;
+  grid-template-rows: 1fr 1.35fr;
+}
+.gallery-layout-2 .fibo-item-1 {
+  grid-column: 1 / 2;
+  grid-row: 1 / 2;
+}
+.gallery-layout-2 .fibo-item-2 {
+  grid-column: 2 / 3;
+  grid-row: 1 / 3;
+}
+.gallery-layout-2 .fibo-item-3 {
+  grid-column: 1 / 2;
+  grid-row: 2 / 3;
+}
+
+/* چیدمان عکس بخش ۴ (Stage 3) */
+.gallery-layout-3 {
+  grid-template-columns: 1.35fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.gallery-layout-3 .fibo-item-1 {
+  grid-column: 1 / 2;
+  grid-row: 1 / 3;
+}
+.gallery-layout-3 .fibo-item-2 {
+  grid-column: 2 / 3;
+  grid-row: 1 / 2;
+}
+.gallery-layout-3 .fibo-item-3 {
+  grid-column: 2 / 3;
+  grid-row: 2 / 3;
+}
+
+.fibo-slot {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 18px;
+  background-color: #E5DFD3;
+  border: 1.5px solid rgba(24, 90, 89, 0.25);
+  box-shadow:
+    0 5px 14px rgba(15, 45, 43, 0.08),
+    inset 0 2px 10px rgba(15, 45, 43, 0.08);
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.fibo-insta-reel {
+  width: 100%;
+  height: 200%;
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  transform: translateY(0%);
+}
+
+.fibo-photo-layer {
+  width: 100%;
+  height: 50%;
+  flex: 0 0 50%;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.35rem;
+  text-align: center;
+  background:
+    radial-gradient(circle at 30% 25%, rgba(255, 255, 255, 0.62), transparent 65%),
+    linear-gradient(145deg, color-mix(in srgb, var(--photo-tint) 22%, #EFE9DF), color-mix(in srgb, var(--photo-tint) 42%, #DFD8CA));
+}
+
+.fibo-art-icon {
+  width: clamp(26px, 3.2vw, 34px);
+  height: clamp(26px, 3.2vw, 34px);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.74);
+  border: 1px solid rgba(212, 175, 55, 0.52);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #185A59;
+  font-weight: 800;
+  font-size: clamp(0.68rem, 0.9vw, 0.8rem);
+}
+
+.fibo-ratio-tag {
+  font-size: clamp(0.62rem, 0.8vw, 0.7rem);
+  font-weight: 700;
+  padding: 2px 9px;
+  border-radius: 999px;
+  background-color: rgba(255, 255, 255, 0.78);
+  color: #153E3D;
+}
+
+.placeholder-title {
+  font-size: clamp(0.72rem, 0.96vw, 0.86rem);
+  font-weight: 700;
+  color: #183534;
+  line-height: 1.34;
+}
+
+.insta-swipe-badge {
+  font-size: clamp(0.6rem, 0.78vw, 0.68rem);
+  font-weight: 600;
+  color: #2B4C4B;
+  opacity: 0.86;
+}
+
+/* ==========================================================================
+   فوتر سایت
+   ========================================================================== */
+.site-footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 30;
+  background: linear-gradient(180deg, #182422 0%, #101918 100%);
+  color: #EFE9DF;
+  border-top: 2px solid #D4AF37;
+  padding: clamp(1rem, 2.2dvh, 1.7rem) clamp(1rem, 3vw, 2.5rem);
+  transform: translateY(105%);
+  will-change: transform, opacity;
+  box-shadow: 0 -18px 42px rgba(0, 0, 0, 0.28);
+}
+
+.footer-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+}
+
+.footer-top-row {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 1.3rem;
+  align-items: start;
+}
+
+.footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.footer-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.footer-logo-img {
+  width: 44px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.footer-brand-title {
+  font-size: clamp(0.92rem, 1.3vw, 1.12rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #D4AF37;
+  direction: ltr;
+  text-align: right;
+}
+
+.footer-brand-tagline {
+  font-size: 0.8rem;
+  color: rgba(239, 233, 223, 0.86);
+  line-height: 1.6;
+}
+
+.footer-links-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.footer-col-heading {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: #F6E59B;
+  margin-bottom: 0.1rem;
+}
+
+.footer-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.footer-jump-btn {
+  background: none;
+  border: none;
+  color: rgba(239, 233, 223, 0.82);
+  font-family: inherit;
+  font-size: 0.76rem;
+  text-align: right;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.footer-jump-btn:hover {
+  color: #D4AF37;
+}
+
+.footer-meta-text {
+  font-size: 0.76rem;
+  color: rgba(239, 233, 223, 0.8);
+  line-height: 1.55;
+}
+
+.footer-bottom-bar {
+  border-top: 1px solid rgba(212, 175, 55, 0.22);
+  padding-top: 0.6rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  color: rgba(239, 233, 223, 0.68);
+}
+
+.footer-back-top {
+  background: rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #F6E59B;
+  border-radius: 999px;
+  padding: 0.25rem 0.8rem;
+  font-family: inherit;
+  font-size: 0.72rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.footer-back-top:hover {
+  background: #D4AF37;
+  color: #182422;
+}
+
+/* ==========================================================================
+   طراحی سیال برای صفحات عمودی (موبایل و تبلت عمودی) با حفظ aspect-ratio و مارجین پایین کافی
+   ========================================================================== */
+@media (max-aspect-ratio: 1/1), (max-width: 860px) {
+  .site-navbar {
+    height: 50px;
+    padding: 0 0.65rem;
+  }
+
+  .navbar-logo-img {
+    width: 28px;
+    height: 24px;
+  }
+
+  .navbar-step-badge {
+    display: none;
+  }
+
+  .stage-scene {
+    padding: 54px 0.85rem clamp(56px, 11dvh, 110px);
+  }
+
+  .outside-section-header {
+    padding: 2px 14px;
+    margin-bottom: 6px;
+  }
+
+  /* در موبایل/عمودی: شکل در بالا و ۳ عکس در پایین، با ارتفاع کل 66dvh تا حداقل 16dvh فضای باز در پایین صفحه باقی بماند */
+  .explanation-mold {
+    width: min(92vw, 640px);
+    height: auto;
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: 820px;
+    grid-template-columns: 1fr;
+    grid-template-rows: minmax(0, 2.1fr) 10px minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .mold-center-gap {
+    height: 10px;
+  }
+
+  .mold-center-gap {
+    display: block;
+    width: 100%;
+  }
+
+  .arch-mold-outer {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+  }
+
+  .fibo-fixed-mold {
+    width: 100%;
+    height: 100%;
+    aspect-ratio: auto;
+    gap: 8px;
+  }
+
+  .fibo-slot {
+    border-radius: 14px;
+    container-type: size;
+  }
+
+  .fibo-photo-layer {
+    padding: 0.4rem;
+    gap: 0.22rem;
+    overflow: hidden;
+  }
+
+  .fibo-art-icon {
+    width: clamp(20px, 11cqmin, 32px);
+    height: clamp(20px, 11cqmin, 32px);
+    border-radius: 8px;
+    font-size: clamp(0.58rem, 4.6cqmin, 0.8rem);
+  }
+
+  .placeholder-title {
+    font-size: clamp(0.62rem, min(5.2cqw, 7.4cqh), 0.86rem);
+    line-height: 1.3;
+  }
+
+  .fibo-ratio-tag,
+  .insta-swipe-badge {
+    font-size: clamp(0.54rem, min(4cqw, 6cqh), 0.68rem);
+  }
+
+  @container (max-height: 150px) {
+    .insta-swipe-badge {
+      display: none;
+    }
+  }
+
+  @container (max-height: 105px) {
+    .fibo-ratio-tag {
+      display: none;
+    }
+  }
+
+  .arch-inner-cavity {
+    inset: 12px;
+    padding: 1.1rem 1rem 0.65rem;
+  }
+
+  .shape-variant-octagon .arch-inner-cavity {
+    padding: 1rem 1.2rem 0.65rem;
+  }
+
+  .shape-variant-teardrop .arch-inner-cavity {
+    padding: 2rem 1.45rem 0.8rem;
+  }
+
+  .shape-variant-star .arch-inner-cavity {
+    padding: 1.8rem 1.8rem 1.25rem;
+  }
+
+  .arch-bullet-list {
+    grid-template-columns: 1fr;
+    gap: 0.16rem;
+  }
+
+  .footer-top-row {
+    grid-template-columns: 1fr;
+    gap: 0.75rem;
+  }
+}
+
+
+/* ==========================================================================
+   موبایل در حالت افقی (ارتفاع کم): چیدمان کنار هم مثل دسکتاپ، اما فشرده تا نوشته‌ها و شکل‌ها جا شوند
+   ========================================================================== */
+@media (orientation: landscape) and (max-height: 560px) {
+  .stage-scene {
+    padding: 50px clamp(0.8rem, 3vw, 2rem) clamp(26px, 7dvh, 44px);
+  }
+
+  .outside-en-heading {
+    display: none;
+  }
+
+  .explanation-mold {
+    width: min(100%, 1100px);
+    height: auto;
+    flex: 1 1 0;
+    min-height: 0;
+    max-height: none;
+    grid-template-columns: minmax(0, 1.08fr) clamp(14px, 2vw, 24px) minmax(0, 1fr);
+    grid-template-rows: minmax(0, 1fr);
+  }
+
+  .arch-mold-outer {
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1.08 / 1;
+  }
+
+  .fibo-fixed-mold {
+    height: 100%;
+    width: auto;
+    aspect-ratio: 1.08 / 1;
+  }
+
+  .mold-center-gap {
+    width: 100%;
+    height: 100%;
+  }
+
+  .arch-inner-cavity {
+    inset: 12px;
+  }
+}
+
+
+/* ==========================================================================
+   ۱. بهینه‌سازی عملکرد گرافیکی و نوار ناوبری موبایل + دکمه سامانه آموزش و ثبت‌نام
+   ========================================================================== */
+.site-navbar {
+  max-width: 100vw;
+  overflow: hidden;
+}
+
+.navbar-inner {
+  min-width: 0;
+}
+
+.navbar-nav {
+  flex: 1 1 0%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+}
+
+.navbar-links {
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.navbar-lms-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.26rem 0.78rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #D4AF37 0%, #F3DC8B 100%);
+  color: #142220;
+  font-size: clamp(0.68rem, 0.88vw, 0.78rem);
+  font-weight: 800;
+  text-decoration: none;
+  white-space: nowrap;
+  border: 1px solid rgba(24, 90, 89, 0.35);
+  box-shadow: 0 3px 10px rgba(212, 175, 55, 0.32);
+  transition: transform 0.2s ease;
+}
+
+.navbar-lms-cta:hover {
+  transform: translateY(-1px);
+}
+
+.hero-academy-cta {
+  pointer-events: auto;
+  margin-top: 0.3rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.48rem 1.15rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #185A59 0%, #0F3E3D 100%);
+  color: #F6E59B;
+  border: 1.5px solid #D4AF37;
+  font-size: clamp(0.75rem, 1.08vw, 0.9rem);
+  font-weight: 800;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(24, 90, 89, 0.24);
+  transition: transform 0.22s ease, background 0.22s ease;
+}
+
+.hero-academy-cta:hover {
+  background: linear-gradient(135deg, #D4AF37 0%, #F6E59B 100%);
+  color: #142220;
+  transform: translateY(-2px);
+}
+
+.cta-gold-star {
+  color: #D4AF37;
+}
+
+.hero-academy-cta:hover .cta-gold-star {
+  color: #142220;
+}
+
+@media (max-aspect-ratio: 1/1), (max-width: 860px) {
+  .site-navbar {
+    height: auto;
+    min-height: 50px;
+    padding: 0.28rem 0.5rem;
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    background: rgba(239, 233, 223, 0.98);
+  }
+
+  .navbar-inner {
+    flex-wrap: wrap;
+    row-gap: 0.22rem;
+  }
+
+  .navbar-brand {
+    order: 1;
+    gap: 0.3rem;
+  }
+
+  .navbar-logo-img {
+    width: 24px;
+    height: 20px;
+  }
+
+  .navbar-brand-text {
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+  }
+
+  .navbar-meta-group {
+    order: 2;
+    gap: 0.25rem;
+  }
+
+  .navbar-lms-cta {
+    font-size: 0.58rem;
+    padding: 0.16rem 0.48rem;
+  }
+
+  .navbar-step-badge {
+    display: none;
+  }
+
+  .navbar-nav {
+    order: 3;
+    flex: 0 0 100%;
+    width: 100%;
+    border-top: 1px solid rgba(24, 90, 89, 0.12);
+    padding-top: 0.18rem;
+  }
+
+  .navbar-links {
+    justify-content: space-between;
+    gap: 0.08rem;
+  }
+
+  .nav-step-btn {
+    padding: 0.16rem 0.26rem;
+    font-size: clamp(0.54rem, 2.15vw, 0.66rem);
+  }
+
+  .stage-scene {
+    padding-top: 74px;
+  }
+
+  .hero-academy-cta {
+    font-size: 0.68rem;
+    padding: 0.38rem 0.85rem;
+  }
+}
+
+/* ==========================================================================
+   ۲. درشت‌تر کردن متون خلاصه روی شکل‌ها و کوچک‌تر کردن ناحیه کلیک به دکمه مشخص
+   ========================================================================== */
+.semicircle-dome-crest {
+  color: #F6E59B;
+}
+
+.arch-step-label {
+  font-size: calc(clamp(0.72rem, 1vw, 0.86rem) * var(--fit, 1));
+}
+
+.arch-heading {
+  font-size: calc(clamp(1.16rem, 1.8vw, 1.48rem) * var(--fit, 1));
+  line-height: 1.38;
+}
+
+.arch-sub-title {
+  font-size: calc(clamp(0.96rem, 1.32vw, 1.18rem) * var(--fit, 1));
+}
+
+.arch-placeholder-text {
+  font-size: calc(clamp(0.96rem, 1.28vw, 1.16rem) * var(--fit, 1));
+  line-height: 1.7;
+  font-weight: 500;
+}
+
+.arch-sub-block {
+  padding: 0.48rem 0.78rem;
+  gap: 0.24rem;
+}
+
+/* دکمه جمع‌وجور و مشخص برای ورود به داخل شکل (تا بقیه فضای صفحه برای اسکرول انگشت آزاد باشد) */
+.shape-enter-hint {
+  pointer-events: auto;
+  cursor: pointer;
+  margin-top: 0.3rem;
+  align-self: center;
+  display: inline-block;
+  padding: 0.32rem 0.88rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.24);
+  border: 1.5px solid #D4AF37;
+  color: #F6E59B;
+  font-family: inherit;
+  font-size: calc(clamp(0.68rem, 0.9vw, 0.82rem) * var(--fit, 1));
+  font-weight: 800;
+  text-align: center;
+  transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease;
+}
+
+.shape-enter-hint:hover {
+  background: #D4AF37;
+  color: #182422;
+  transform: scale(1.04);
+}
+
+.arch-mold-outer {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+/* ==========================================================================
+   ۳. عکس‌های تمیز بدون نوشته‌های پلیس‌هولدر + افزایش ارتفاع عکس‌های اسلاید دوم
+   ========================================================================== */
+.clickable-photo-slot {
+  pointer-events: auto;
+  cursor: pointer;
+}
+
+.fibo-photo-layer.has-custom-artwork {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+  height: 50%;
+  flex: 0 0 50%;
+}
+
+.fibo-artwork-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+  transition: transform 0.45s ease;
+}
+
+.clickable-photo-slot:hover .fibo-artwork-img {
+  transform: scale(1.035);
+}
+
+.photo-zoom-indicator {
+  position: absolute;
+  bottom: 8px;
+  left: 8px;
+  z-index: 2;
+  width: 26px;
+  height: 26px;
+  border-radius: 8px;
+  background: rgba(15, 38, 36, 0.72);
+  border: 1px solid rgba(212, 175, 55, 0.68);
+  color: #F6E59B;
+  font-size: 0.78rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0.82;
+  pointer-events: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.clickable-photo-slot:hover .photo-zoom-indicator {
+  opacity: 1;
+  transform: scale(1.08);
+  background: #D4AF37;
+  color: #142220;
+}
+
+/* چیدمان دو عکس مرتفع در سمت چپ و راست خط طلایی در اسلاید دوم */
+.second-scroll-photos-grid {
+  position: absolute;
+  top: 1dvh;
+  left: 50%;
+  transform: translateX(-50%);
+  width: min(90vw, 1140px);
+  height: 80dvh;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) clamp(88px, 14vw, 156px) minmax(0, 1fr);
+  align-items: center;
+  justify-items: center;
+  pointer-events: none;
+  z-index: 4;
+}
+
+.second-scroll-line-gap {
+  width: 100%;
+  height: 100%;
+}
+
+.fibo-slot.second-scroll-photo {
+  pointer-events: auto;
+  cursor: pointer;
+  width: min(100%, 390px);
+  /* ارتفاع بسیار بلندتر مطابق درخواست کاربر */
+  height: min(72dvh, 600px);
+  opacity: 0;
+  transform: translateY(18px);
+  border: 1.5px solid rgba(212, 175, 55, 0.55);
+  box-shadow: 0 12px 28px rgba(15, 45, 43, 0.16);
+}
+
+.second-scroll-photo .fibo-photo-layer.has-custom-artwork {
+  height: 100%;
+  flex: 0 0 100%;
+}
+
+@media (max-aspect-ratio: 1/1), (max-width: 860px) {
+  .second-scroll-photos-grid {
+    width: 92vw;
+    height: 78dvh;
+    grid-template-columns: minmax(0, 1fr) clamp(64px, 16vw, 96px) minmax(0, 1fr);
+  }
+
+  .fibo-slot.second-scroll-photo {
+    height: min(60dvh, 460px);
+  }
+}
+
+/* ==========================================================================
+   ۴. بخش هیئت مدیره بدون اعداد پلیس‌هولدر + مارجین کافی برای آیفون
+   ========================================================================== */
+.board-directors-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 58px clamp(0.8rem, 3vw, 2.5rem) calc(clamp(185px, 28dvh, 240px) + env(safe-area-inset-bottom, 16px));
+  gap: clamp(0.4rem, 1.1dvh, 0.85rem);
+  pointer-events: none;
+  z-index: 20;
+  opacity: 0;
+  visibility: hidden;
+  will-change: transform, opacity;
+}
+
+.board-circles-container {
+  position: relative;
+  z-index: 5;
+  width: min(100%, 880px);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.5rem, 2.6vw, 2.4rem);
+  align-items: start;
+  justify-items: center;
+  direction: rtl;
+}
+
+.board-circle-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: clamp(0.35rem, 0.9dvh, 0.65rem);
+  width: 100%;
+}
+
+.arch-mold-outer.shape-variant-circle.board-circle-mold {
+  width: clamp(92px, min(16.5vw, 19.5dvh), 156px);
+  height: clamp(92px, min(16.5vw, 19.5dvh), 156px);
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  flex-shrink: 0;
+  pointer-events: none;
+}
+
+.arch-inner-cavity.board-circle-cavity {
+  inset: clamp(10px, 1.7vmin, 15px);
+  border-radius: 50%;
+  padding: 0;
+  opacity: 1;
+}
+
+.fibo-photo-layer.board-face-placeholder {
+  position: relative;
+  z-index: 3;
+  width: 100%;
+  height: 100%;
+  flex: 0 0 100%;
+  border-radius: 50%;
+  padding: 0.4rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board-avatar-silhouette {
+  width: 58%;
+  height: 58%;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1.5px dashed rgba(24, 90, 89, 0.48);
+  color: #185A59;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.board-avatar-silhouette svg {
+  width: 68%;
+  height: 68%;
+}
+
+.board-role-caption {
+  font-size: clamp(0.7rem, 1.04vw, 0.9rem);
+  font-weight: 800;
+  color: #182422;
+  background: rgba(255, 255, 255, 0.72);
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  border-radius: 999px;
+  padding: 0.22rem clamp(0.5rem, 1.2vw, 1rem);
+  box-shadow: 0 4px 12px rgba(15, 45, 43, 0.08);
+  text-align: center;
+  line-height: 1.32;
+}
+
+.board-final-slogan {
+  position: relative;
+  z-index: 5;
+  margin-top: clamp(0.15rem, 0.5dvh, 0.35rem);
+  margin-bottom: clamp(1.4rem, 4.2dvh, 2.8rem);
+  padding: clamp(0.4rem, 0.95dvh, 0.68rem) clamp(1rem, 2.4vw, 1.8rem);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #185A59 0%, #113C3B 100%);
+  border: 1.5px solid #D4AF37;
+  box-shadow: 0 8px 22px rgba(15, 45, 43, 0.2);
+  text-align: center;
+  max-width: 94vw;
+}
+
+.board-slogan-quote {
+  font-size: clamp(0.76rem, 1.25vw, 1.04rem);
+  font-weight: 800;
+  color: #F6E59B;
+}
+
+/* ==========================================================================
+   ۵. فوتر سایت
+   ========================================================================== */
+.site-footer {
+  pointer-events: auto;
+  padding: clamp(0.55rem, 1.2dvh, 0.95rem) clamp(0.9rem, 2.8vw, 2.2rem) calc(clamp(0.55rem, 1.2dvh, 0.95rem) + env(safe-area-inset-bottom, 8px));
+}
+
+.footer-inner {
+  gap: 0.45rem;
+}
+
+.footer-top-row {
+  grid-template-columns: 1.35fr 0.9fr 1.25fr;
+  gap: 0.9rem;
+}
+
+.footer-academy-main-link {
+  margin-top: 0.15rem;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.28rem 0.78rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.18);
+  border: 1px solid #D4AF37;
+  color: #F6E59B;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.footer-academy-main-link:hover {
+  background: #D4AF37;
+  color: #142220;
+}
+
+.footer-social-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.footer-gold-social-label {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.18rem 0.68rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #D4AF37 0%, #F3DC8B 100%);
+  color: #142220;
+  font-size: 0.72rem;
+  font-weight: 800;
+}
+
+.footer-social-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.32rem;
+}
+
+.footer-social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.24rem 0.58rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.42);
+  color: #EFE9DF;
+  font-size: 0.68rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.footer-social-pill:hover {
+  background: rgba(212, 175, 55, 0.24);
+  border-color: #D4AF37;
+  color: #F6E59B;
+}
+
+.social-gold-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #D4AF37;
+  flex-shrink: 0;
+}
+
+.footer-legal-credits {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.vortex-copyright-text {
+  font-size: 0.7rem;
+  color: rgba(239, 233, 223, 0.85);
+}
+
+.vortex-copyright-text strong {
+  color: #D4AF37;
+  letter-spacing: 0.04em;
+}
+
+.vortex-studio-link {
+  color: #F6E59B;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.footer-github-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.16rem 0.62rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  color: #F6E59B;
+  font-size: 0.68rem;
+  font-weight: 800;
+  text-decoration: none;
+  direction: ltr;
+}
+
+@media (max-aspect-ratio: 1/1), (max-width: 860px) {
+  .board-directors-scene {
+    padding: 76px 0.45rem calc(clamp(205px, 34dvh, 265px) + env(safe-area-inset-bottom, 18px));
+    gap: 0.28rem;
+  }
+
+  .board-circles-container {
+    gap: 0.3rem;
+  }
+
+  .arch-mold-outer.shape-variant-circle.board-circle-mold {
+    width: clamp(68px, min(21vw, 13.5dvh), 102px);
+    height: clamp(68px, min(21vw, 13.5dvh), 102px);
+  }
+
+  .arch-inner-cavity.board-circle-cavity {
+    inset: 7px;
+  }
+
+  .board-role-caption {
+    font-size: clamp(0.54rem, 2.3vw, 0.7rem);
+    padding: 0.14rem 0.34rem;
+  }
+
+  .board-final-slogan {
+    margin-top: 0.1rem;
+    margin-bottom: clamp(1.5rem, 4.5dvh, 2.6rem);
+    padding: 0.32rem 0.75rem;
+  }
+
+  .board-slogan-quote {
+    font-size: clamp(0.64rem, 2.85vw, 0.82rem);
+  }
+
+  .site-footer {
+    padding: 0.45rem 0.65rem calc(0.45rem + env(safe-area-inset-bottom, 10px));
+  }
+
+  .footer-inner {
+    gap: 0.32rem;
+  }
+
+  .footer-top-row {
+    grid-template-columns: 1fr;
+    gap: 0.35rem;
+  }
+
+  .footer-brand-tagline,
+  .footer-links-col {
+    display: none;
+  }
+
+  .footer-brand-header {
+    gap: 0.4rem;
+  }
+
+  .footer-logo-img {
+    width: 26px;
+    height: 22px;
+  }
+
+  .footer-brand-title {
+    font-size: 0.72rem;
+  }
+
+  .footer-academy-main-link {
+    font-size: 0.62rem;
+    padding: 0.2rem 0.58rem;
+  }
+
+  .footer-gold-social-label {
+    font-size: 0.62rem;
+    padding: 0.14rem 0.52rem;
+  }
+
+  .footer-social-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.24rem;
+  }
+
+  .footer-social-pill {
+    padding: 0.18rem 0.28rem;
+    font-size: 0.54rem;
+    justify-content: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .footer-bottom-bar {
+    padding-top: 0.28rem;
+    gap: 0.3rem;
+  }
+
+  .vortex-copyright-text {
+    font-size: 0.58rem;
+    line-height: 1.35;
+  }
+
+  .footer-github-badge {
+    font-size: 0.58rem;
+    padding: 0.12rem 0.45rem;
+  }
+
+  .footer-back-top {
+    font-size: 0.6rem;
+    padding: 0.16rem 0.55rem;
+  }
+}
+
+/* ==========================================================================
+   ۶. بوم سخت‌افزاری ۶۰ فریم بر ثانیه برای انیمیشن ورود و خروج معکوس دوربین به شکل
+   ========================================================================== */
+.camera-portal-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  pointer-events: none;
+  z-index: 145;
+  opacity: 0;
+  visibility: hidden;
+  will-change: opacity;
+}
+
+.camera-portal-canvas.is-active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.shape-interior-view {
+  --shape-interior-bg: #185A59;
+  position: fixed;
+  inset: 0;
+  z-index: 150;
+  background-color: var(--shape-interior-bg);
+  color: #EFE9DF;
+  display: flex;
+  flex-direction: column;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform-origin: center center;
+  will-change: opacity, transform;
+  overflow: hidden;
+}
+
+.shape-interior-view.is-visible {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.interior-bevel-wall {
+  position: absolute;
+  pointer-events: none;
+}
+
+.interior-wall-1 {
+  inset: 0;
+  border: 6px solid #D5CFC2;
+  z-index: 1;
+}
+
+.interior-wall-2 {
+  inset: 6px;
+  border: 6px solid #C2BCB0;
+  z-index: 2;
+}
+
+.interior-wall-3 {
+  inset: 12px;
+  border: 6px solid #ABA598;
+  box-shadow: inset 0 0 0 1.5px rgba(212, 175, 55, 0.55);
+  z-index: 3;
+}
+
+.interior-cavity-shadow {
+  position: absolute;
+  inset: 18px;
+  z-index: 4;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 65% 72%, rgba(255, 255, 255, 0.11) 0%, transparent 52%),
+    linear-gradient(135deg, rgba(2, 14, 13, 0.58) 0%, rgba(2, 14, 13, 0.18) 28%, transparent 58%, rgba(255, 255, 255, 0.12) 100%);
+  box-shadow:
+    inset 0 28px 46px rgba(3, 16, 15, 0.72),
+    inset 0 -28px 46px rgba(3, 16, 15, 0.65),
+    inset 20px 0 36px rgba(3, 16, 15, 0.52),
+    inset -20px 0 36px rgba(3, 16, 15, 0.52);
+}
+
+.interior-content-wrap {
+  position: relative;
+  z-index: 6;
+  margin: 18px;
+  height: calc(100% - 36px);
+  display: flex;
+  flex-direction: column;
+  padding: clamp(1rem, 2.4dvh, 1.8rem) clamp(1.1rem, 3.5vw, 3rem);
+  overflow: hidden;
+}
+
+.interior-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  padding-bottom: 0.8rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.38);
+  flex-shrink: 0;
+}
+
+.interior-title-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.25rem;
+}
+
+.interior-crest {
+  align-self: flex-start;
+  margin-bottom: 0;
+}
+
+.interior-main-title {
+  font-size: clamp(1.02rem, 1.75vw, 1.48rem);
+  font-weight: 800;
+  color: #FFFDF5;
+  line-height: 1.34;
+}
+
+.interior-exit-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.42rem 1rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.22);
+  border: 1.5px solid #D4AF37;
+  color: #FFFDF5;
+  font-family: inherit;
+  font-size: clamp(0.74rem, 0.95vw, 0.85rem);
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.interior-exit-btn:hover {
+  background: #D4AF37;
+  color: #182422;
+}
+
+.interior-scroll-area {
+  flex: 1 1 0%;
+  min-height: 0;
+  overflow-y: auto;
+  padding: clamp(0.9rem, 2dvh, 1.4rem) 0.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  touch-action: pan-y;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.55) transparent;
+}
+
+.interior-lead-card {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  border-right: 4px solid #D4AF37;
+  border-radius: 14px;
+  padding: clamp(0.95rem, 1.8vw, 1.4rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.interior-lead-label {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #D4AF37;
+  letter-spacing: 0.08em;
+  direction: ltr;
+  align-self: flex-start;
+}
+
+.interior-lead-heading {
+  font-size: clamp(0.95rem, 1.4vw, 1.22rem);
+  font-weight: 800;
+  color: #F6E59B;
+  line-height: 1.4;
+}
+
+.interior-paragraph {
+  font-size: clamp(0.82rem, 1.04vw, 0.96rem);
+  line-height: 1.88;
+  color: #EFE9DF;
+  text-align: justify;
+}
+
+.interior-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 0.85rem;
+}
+
+.interior-sub-card {
+  background: rgba(0, 0, 0, 0.24);
+  border: 1px solid rgba(212, 175, 55, 0.34);
+  border-right: 3px solid #D4AF37;
+  border-radius: 12px;
+  padding: clamp(0.85rem, 1.5vw, 1.15rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.interior-sub-badge {
+  align-self: flex-start;
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: #D4AF37;
+  background: rgba(212, 175, 55, 0.14);
+  border: 1px solid rgba(212, 175, 55, 0.42);
+  padding: 0.12rem 0.55rem;
+  border-radius: 999px;
+  direction: ltr;
+}
+
+.interior-sub-title {
+  font-size: clamp(0.86rem, 1.12vw, 1rem);
+  font-weight: 800;
+  color: #F6E59B;
+  line-height: 1.38;
+}
+
+.interior-Bullet-grid {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 0.55rem;
+  margin-top: 0.25rem;
+}
+
+.interior-Bullet-grid li {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(212, 175, 55, 0.35);
+  border-radius: 10px;
+  padding: 0.55rem 0.8rem;
+  font-size: clamp(0.78rem, 0.96vw, 0.88rem);
+  font-weight: 600;
+  color: #EFE9DF;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.interior-Bullet-grid li::before {
+  content: '✦';
+  color: #D4AF37;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+}
+
+/* ==========================================================================
+   ۷. لایت‌باکس بزرگ‌نمایی عکس‌ها با خط طلایی دور عکس، توضیحات زیر آن و دکمه برگشت
+   ========================================================================== */
+.photo-lightbox-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 165;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(0.85rem, 2.5vw, 2rem);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.32s ease, visibility 0.32s ease;
+}
+
+.photo-lightbox-modal.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(12, 26, 25, 0.88);
+}
+
+.lightbox-card {
+  position: relative;
+  z-index: 2;
+  width: min(92vw, 760px);
+  max-height: 90dvh;
+  background: #EFE9DF;
+  border-radius: 24px;
+  border: 1.5px solid rgba(212, 175, 55, 0.65);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.55);
+  padding: clamp(0.85rem, 2vw, 1.4rem);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.85rem;
+  transform: scale3d(0.92, 0.92, 1);
+  transition: transform 0.34s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.photo-lightbox-modal.is-open .lightbox-card {
+  transform: scale3d(1, 1, 1);
+}
+
+.lightbox-top-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.lightbox-brand-tag {
+  font-size: 0.72rem;
+  font-weight: 800;
+  letter-spacing: 0.16em;
+  color: #185A59;
+  direction: ltr;
+}
+
+.lightbox-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.38rem 0.95rem;
+  border-radius: 999px;
+  background: #185A59;
+  border: 1.5px solid #D4AF37;
+  color: #F6E59B;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.lightbox-back-btn:hover {
+  background: #D4AF37;
+  color: #142220;
+}
+
+.lightbox-image-stage {
+  position: relative;
+  width: 100%;
+  max-height: 58dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+}
+
+.lightbox-gold-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 3;
+  overflow: visible;
+}
+
+.lightbox-gold-rect {
+  fill: none;
+  stroke: #D4AF37;
+  stroke-width: 3.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  filter: url(#shinyTipGlow);
+}
+
+.lightbox-img-frame {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: min(55dvh, 460px);
+  border-radius: 16px;
+  overflow: hidden;
+  background: #182422;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-full-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #142220;
+}
+
+.lightbox-caption-panel {
+  width: 100%;
+  background: linear-gradient(135deg, #185A59 0%, #103837 100%);
+  border: 1px solid #D4AF37;
+  border-radius: 16px;
+  padding: 0.75rem 1.1rem;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.lightbox-photo-title {
+  font-size: clamp(0.92rem, 1.3vw, 1.12rem);
+  font-weight: 800;
+  color: #F6E59B;
+}
+
+.lightbox-photo-desc {
+  font-size: clamp(0.78rem, 1vw, 0.9rem);
+  line-height: 1.65;
+  color: #EFE9DF;
+}
+
+/* کادر دقیق لایت‌باکس دور عکس بدون حاشیه اضافه و انیمیشن چندقطعه داخل شکل */
+.lightbox-card {
+  width: fit-content !important;
+  min-width: min(88vw, 440px);
+  max-width: min(92vw, 760px);
+}
+.lightbox-image-stage {
+  width: fit-content !important;
+  max-width: 100%;
+  margin: 0 auto;
+  padding: 7px;
+}
+.lightbox-img-frame {
+  width: fit-content !important;
+  height: auto !important;
+  max-height: min(58dvh, 480px);
+  background: transparent !important;
+}
+.lightbox-full-img {
+  width: auto !important;
+  height: auto !important;
+  max-width: min(84vw, 680px);
+  max-height: min(57dvh, 470px);
+  display: block;
+  border-radius: 14px;
+}
+.lightbox-caption-panel {
+  max-width: min(84vw, 680px);
+}
+
+.interior-wall-1,
+.interior-wall-2,
+.interior-wall-3,
+.interior-top-bar,
+.interior-crest-badge,
+.interior-main-title,
+.interior-lead-card,
+.interior-sub-card,
+.interior-cta-row {
+  will-change: transform, opacity;
+}
+
+@media (max-width: 768px) {
+  .hero-logo-frame {
+    width: clamp(165px, 23vh, 225px);
+    height: calc(clamp(165px, 23vh, 225px) * 0.827);
+  }
+}
+
+/* قرارگیری بوم تونل سه‌بعدی روی نمای داخلی در حین پرواز دوربین تا نمای داخلی دقیقاً از داخل دهانه شکل دیده شود */
+.camera-portal-canvas {
+  z-index: 162 !important;
+  pointer-events: none !important;
+}
+.shape-interior-view {
+  z-index: 158 !important;
+}
+
+/* بهینه‌سازی چیدمان و ابعاد عکس‌ها در موبایل و طیف رنگی شکل‌ها (#185A59 تا #0E939D) */
+.arch-spectrum-fill {
+  background-image: none !important;
+}
+
+.shape-interior-view {
+  background-color: var(--shape-interior-bg, #185A59);
+  background-image: none;
+}
+
+.lightbox-caption-panel {
+  background: linear-gradient(135deg, #185A59 0%, #0E939D 100%) !important;
+}
+
+.fibo-insta-reel {
+  width: 100%;
+  height: 200%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin: 0;
+  padding: 0;
+}
+
+.fibo-photo-layer.has-custom-artwork {
+  position: relative;
+  width: 100%;
+  height: 50%;
+  flex: 0 0 50%;
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden;
+  display: block;
+}
+
+.fibo-artwork-img {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover;
+  object-position: center center;
+  display: block;
+}
+
+.second-scroll-photo .fibo-photo-layer.has-custom-artwork {
+  height: 100% !important;
+  flex: 0 0 100% !important;
+}
+
+@media (max-aspect-ratio: 1/1), (max-width: 860px) {
+  /* آزادسازی فضای عمودی هدررفته در پایین صحنه در موبایل بدون تغییر ساختار صفحه */
+  .stage-scene {
+    padding: 66px 0.65rem 16px !important;
+  }
+
+  .outside-section-header {
+    padding: 2px 10px !important;
+    margin-bottom: 4px !important;
+  }
+
+  /* توازن ایده‌آل بین شکل در بالا و گالری عکس بزرگ‌تر و خوش‌فرم در پایین */
+  .explanation-mold {
+    width: min(94vw, 620px) !important;
+    grid-template-columns: 1fr !important;
+    grid-template-rows: minmax(0, 1.38fr) 8px minmax(0, 1.24fr) !important;
+    gap: 0 !important;
+  }
+
+  .mold-center-gap {
+    height: 8px !important;
+  }
+
+  .fibo-fixed-mold {
+    width: 100% !important;
+    height: 100% !important;
+    aspect-ratio: auto !important;
+    gap: 8px !important;
+  }
+
+  /* توازن ردیف‌ها و ستون‌های گالری در موبایل متناسب با ابعاد ۴:۳ و ۳:۴ عکس‌ها تا کراپ نشوند */
+  .gallery-layout-0 {
+    grid-template-columns: 1.12fr 1fr !important;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) !important;
+  }
+
+  .gallery-layout-1 {
+    grid-template-columns: 1fr 1fr !important;
+    grid-template-rows: minmax(0, 1.08fr) minmax(0, 1fr) !important;
+  }
+
+  .gallery-layout-2 {
+    grid-template-columns: 1fr 1.12fr !important;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) !important;
+  }
+
+  .gallery-layout-3 {
+    grid-template-columns: 1.12fr 1fr !important;
+    grid-template-rows: minmax(0, 1fr) minmax(0, 1fr) !important;
+  }
+
+  .fibo-slot {
+    border-radius: 14px !important;
+    container-type: normal !important;
+  }
+
+  /* تناسب دقیق ۳:۴ برای دو عکس اسلاید دوم در موبایل تا طرفین عکس‌ها اصلاً کراپ نشوند */
+  .second-scroll-photos-grid {
+    width: 95vw !important;
+    height: 78dvh !important;
+    grid-template-columns: minmax(0, 1fr) clamp(44px, 11vw, 68px) minmax(0, 1fr) !important;
+  }
+
+  .fibo-slot.second-scroll-photo {
+    width: 100% !important;
+    height: auto !important;
+    aspect-ratio: 3 / 4 !important;
+    max-height: min(54dvh, 360px) !important;
+  }
+}
