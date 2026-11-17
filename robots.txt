@@ -1,0 +1,60 @@
+# ==============================================================================
+# robots.txt — MODESHAHR | Digital Fashion Design Academy (https://modeshahr.ir)
+# Engineered by Vortex RJ Studio (https://vortexrjstudio.com)
+# Policy: Maximum visibility across Search Engines, Answer Engines (AEO),
+#         Generative AI Search (GEO), and User-Initiated AI Agents (AGO).
+# ==============================================================================
+
+User-agent: *
+Allow: /
+
+# Classic Search Engines (Feed Google AI Overviews, AI Mode & Microsoft Copilot)
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: Applebot
+Allow: /
+
+# AI Search & Answer Engine Crawlers (ChatGPT Search, Perplexity, Claude Search)
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+# User-Initiated AI Fetchers & Browser Agents
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+# Generative AI Grounding & Ecosystem Tokens
+User-agent: Google-Extended
+Allow: /
+
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+Sitemap: https://modeshahr.ir/sitemap.xml

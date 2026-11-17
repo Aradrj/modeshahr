@@ -2494,3 +2494,220 @@ body {
     max-height: min(54dvh, 360px) !important;
   }
 }
+
+/* ==========================================================================
+   ۸. استایل پنل‌های از پیش رندرشده داخل شکل و کارت‌های پرسش و پاسخ (AEO / GEO / FAQ)
+   هماهنگ با پالت رنگی زمردی (#185A59 تا #0E939D) و طلایی (#D4AF37)
+   ========================================================================== */
+.interior-stage-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 100%;
+}
+
+.interior-stage-panel[hidden] {
+  display: none !important;
+}
+
+.interior-faq-card {
+  background: rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(212, 175, 55, 0.38);
+  border-right: 4px solid #D4AF37;
+  border-radius: 14px;
+  padding: clamp(0.95rem, 1.8vw, 1.35rem);
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  will-change: transform, opacity;
+}
+
+.interior-faq-heading {
+  font-size: clamp(0.88rem, 1.18vw, 1.05rem);
+  font-weight: 800;
+  color: #F6E59B;
+  line-height: 1.4;
+}
+
+.interior-faq-item {
+  background: rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(212, 175, 55, 0.28);
+  border-radius: 10px;
+  padding: 0.62rem 0.88rem;
+  transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.interior-faq-item[open] {
+  background: rgba(0, 0, 0, 0.28);
+  border-color: rgba(212, 175, 55, 0.62);
+}
+
+.interior-faq-q {
+  font-size: clamp(0.8rem, 1vw, 0.94rem);
+  font-weight: 700;
+  color: #FFFDF5;
+  cursor: pointer;
+  list-style: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+}
+
+.interior-faq-q::-webkit-details-marker {
+  display: none;
+}
+
+.interior-faq-q::after {
+  content: '✦';
+  color: #D4AF37;
+  font-size: 0.78rem;
+  flex-shrink: 0;
+  transition: transform 0.25s ease;
+}
+
+.interior-faq-item[open] .interior-faq-q::after {
+  transform: rotate(45deg);
+}
+
+.interior-faq-a {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid rgba(212, 175, 55, 0.22);
+  font-size: clamp(0.78rem, 0.95vw, 0.88rem);
+  line-height: 1.82;
+  color: #EFE9DF;
+  text-align: justify;
+}
+
+.interior-inline-link {
+  color: #F6E59B;
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  direction: ltr;
+  display: inline-block;
+}
+
+.interior-inline-link:hover {
+  color: #D4AF37;
+}
+
+/* ==========================================================================
+   ۹. استایل تصاویر رسمی هیئت مدیره (قابل کلیک و بزرگ‌نمایی در لایت‌باکس همراه با رزومه کامل)
+   ========================================================================== */
+.board-circle-column.clickable-photo-slot {
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
+.arch-mold-outer.shape-variant-circle.board-circle-mold {
+  pointer-events: auto !important;
+  cursor: pointer;
+}
+
+.board-circle-cavity .fibo-photo-layer.has-custom-artwork.board-face-photo {
+  width: 100% !important;
+  height: 100% !important;
+  flex: 0 0 100% !important;
+  border-radius: 50% !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.board-portrait-img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center 16% !important;
+  border-radius: 50% !important;
+  transition: transform 0.4s ease !important;
+}
+
+.board-circle-column.clickable-photo-slot:hover .board-portrait-img {
+  transform: scale(1.06);
+}
+
+.board-role-caption {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  border-radius: 16px;
+  padding: 0.25rem clamp(0.6rem, 1.3vw, 1.1rem);
+  transition: transform 0.22s ease, border-color 0.22s ease, box-shadow 0.22s ease;
+}
+
+.board-circle-column.clickable-photo-slot:hover .board-role-caption {
+  border-color: #D4AF37;
+  background: rgba(255, 255, 255, 0.92);
+  box-shadow: 0 6px 16px rgba(212, 175, 55, 0.28);
+  transform: translateY(-2px);
+}
+
+.board-member-name {
+  font-size: clamp(0.72rem, 1.05vw, 0.92rem);
+  font-weight: 800;
+  color: #182422;
+  line-height: 1.25;
+}
+
+.board-member-role {
+  font-size: clamp(0.62rem, 0.86vw, 0.76rem);
+  font-weight: 700;
+  color: #185A59;
+  line-height: 1.25;
+}
+
+.lightbox-full-img {
+  max-height: min(48dvh, 410px) !important;
+}
+
+.lightbox-caption-panel {
+  max-height: 33dvh;
+  overflow-y: auto;
+  touch-action: pan-y;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(212, 175, 55, 0.55) transparent;
+}
+
+.lightbox-photo-desc {
+  white-space: pre-line;
+  text-align: justify;
+  line-height: 1.72;
+}
+
+@media (max-aspect-ratio: 1/1), (max-width: 860px) {
+  .board-role-caption {
+    padding: 0.16rem 0.36rem;
+    border-radius: 12px;
+    gap: 1px;
+  }
+
+  .board-member-name {
+    font-size: clamp(0.56rem, 2.4vw, 0.72rem);
+  }
+
+  .board-member-role {
+    font-size: clamp(0.48rem, 2.05vw, 0.62rem);
+  }
+}
+
+/* حذف کامل سایه روی عکس‌های قسمت هیئت مدیره تا چهره‌ها کاملاً روشن و شفاف دیده شوند */
+.board-circle-cavity .arch-inner-shadow-overlay,
+.board-circle-cavity .arch-spectrum-fill {
+  display: none !important;
+  opacity: 0 !important;
+  box-shadow: none !important;
+  background: none !important;
+}
+
+.board-circle-cavity,
+.board-circle-cavity .fibo-photo-layer.has-custom-artwork.board-face-photo,
+.board-portrait-img {
+  box-shadow: none !important;
+  background: transparent !important;
+  filter: none !important;
+}

@@ -1749,38 +1749,48 @@ var Geom = (function () {
     if (interiorMainTitle) interiorMainTitle.textContent = info.title;
 
     if (!interiorScrollArea) return;
-    let html = `<article class="interior-lead-card">`;
-    html += `<span class="interior-lead-label">${info.leadLabel}</span>`;
-    html += `<h3 class="interior-lead-heading">${info.leadHeading}</h3>`;
-    info.paragraphs.forEach(function (p) {
-      html += `<p class="interior-paragraph">${p}</p>`;
-    });
-    html += `</article>`;
-
-    if (info.cards && info.cards.length) {
-      html += `<div class="interior-cards-grid">`;
-      info.cards.forEach(function (c) {
-        html += `<div class="interior-sub-card">`;
-        html += `<span class="interior-sub-badge">${c.badge}</span>`;
-        html += `<h4 class="interior-sub-title">${c.title}</h4>`;
-        html += `<p class="interior-paragraph">${c.text}</p>`;
-        html += `</div>`;
+    const preRenderedPanels = Array.from(interiorScrollArea.querySelectorAll('[data-interior-panel]'));
+    if (preRenderedPanels.length > 0) {
+      preRenderedPanels.forEach(function (panel) {
+        const pIdx = parseInt(panel.getAttribute('data-interior-panel'), 10);
+        const isMatch = pIdx === stageIdx;
+        panel.hidden = !isMatch;
+        panel.style.display = isMatch ? 'flex' : 'none';
       });
-      html += `</div>`;
-    }
-
-    if (info.bullets && info.bullets.length) {
-      html += `<article class="interior-lead-card">`;
-      html += `<h4 class="interior-sub-title">${info.bulletsTitle}</h4>`;
-      html += `<ul class="interior-Bullet-grid">`;
-      info.bullets.forEach(function (b) {
-        html += `<li><span>${b}</span></li>`;
+    } else {
+      let html = `<article class="interior-lead-card">`;
+      html += `<span class="interior-lead-label">${info.leadLabel}</span>`;
+      html += `<h3 class="interior-lead-heading">${info.leadHeading}</h3>`;
+      info.paragraphs.forEach(function (p) {
+        html += `<p class="interior-paragraph">${p}</p>`;
       });
-      html += `</ul>`;
       html += `</article>`;
+
+      if (info.cards && info.cards.length) {
+        html += `<div class="interior-cards-grid">`;
+        info.cards.forEach(function (c) {
+          html += `<div class="interior-sub-card">`;
+          html += `<span class="interior-sub-badge">${c.badge}</span>`;
+          html += `<h4 class="interior-sub-title">${c.title}</h4>`;
+          html += `<p class="interior-paragraph">${c.text}</p>`;
+          html += `</div>`;
+        });
+        html += `</div>`;
+      }
+
+      if (info.bullets && info.bullets.length) {
+        html += `<article class="interior-lead-card">`;
+        html += `<h4 class="interior-sub-title">${info.bulletsTitle}</h4>`;
+        html += `<ul class="interior-Bullet-grid">`;
+        info.bullets.forEach(function (b) {
+          html += `<li><span>${b}</span></li>`;
+        });
+        html += `</ul>`;
+        html += `</article>`;
+      }
+      interiorScrollArea.innerHTML = html;
     }
 
-    interiorScrollArea.innerHTML = html;
     interiorScrollArea.scrollTop = 0;
     cachedInteriorParts = getInteriorParts();
   }
@@ -1823,6 +1833,8 @@ var Geom = (function () {
   let cachedInteriorParts = null;
   function getInteriorParts() {
     if (!shapeInteriorView) return null;
+    const activeIdx = activeInteriorStage >= 0 ? activeInteriorStage : 0;
+    const scopeEl = shapeInteriorView.querySelector(`[data-interior-panel="${activeIdx}"]`) || shapeInteriorView;
     return {
       wall1: shapeInteriorView.querySelector('.interior-wall-1'),
       wall2: shapeInteriorView.querySelector('.interior-wall-2'),
@@ -1830,9 +1842,9 @@ var Geom = (function () {
       topBar: shapeInteriorView.querySelector('.interior-top-bar'),
       crest: shapeInteriorView.querySelector('.interior-crest-badge'),
       title: shapeInteriorView.querySelector('.interior-main-title'),
-      lead: shapeInteriorView.querySelector('.interior-lead-card'),
-      subs: Array.from(shapeInteriorView.querySelectorAll('.interior-sub-card')),
-      cta: shapeInteriorView.querySelector('.interior-cta-row')
+      lead: scopeEl.querySelector('.interior-lead-card'),
+      subs: Array.from(scopeEl.querySelectorAll('.interior-sub-card, .interior-faq-card')),
+      cta: scopeEl.querySelector('.interior-cta-row')
     };
   }
 
