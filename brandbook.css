@@ -1,0 +1,2361 @@
+/* ==========================================================================
+   MODESHAHR BRAND BOOK — Luxury Editorial Web Edition
+   Engineered by Vortex RJ Studio (https://vortexrjstudio.com)
+   Colors: Ivory #F4F1EA | Modeshahr Teal #0E939D | Deep Teal #185A59 |
+           Obsidian #101415 | Silver #B9B9B5 | Champagne Gold #D4AF37
+   ========================================================================== */
+
+:root {
+  --bb-ivory: #F4F1EA;
+  --bb-ivory-soft: #EFE9DF;
+  --bb-teal: #0E939D;
+  --bb-teal-deep: #185A59;
+  --bb-obsidian: #101415;
+  --bb-obsidian-card: #151B1C;
+  --bb-silver: #B9B9B5;
+  --bb-gold: #D4AF37;
+  --bb-gold-light: #F6E59B;
+  --bb-ink: #182422;
+  --bb-muted: #546260;
+  --bb-line: rgba(16, 20, 21, 0.16);
+  --bb-line-dark: rgba(244, 241, 234, 0.18);
+  --font-fa: 'Vazirmatn', 'Noto Sans Arabic', system-ui, -apple-system, sans-serif;
+  --font-en: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', Georgia, 'Times New Roman', serif;
+  --ease-luxury: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  background-color: #E6E0D4;
+  color: var(--bb-ink);
+  font-family: var(--font-fa);
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  background: radial-gradient(circle at 50% 0%, #EFEAE0 0%, #DFD8CA 100%);
+  min-height: 100vh;
+  overflow-x: hidden;
+  line-height: 1.75;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   Top Sticky Editorial Navigation & Progress Bar
+   ========================================================================== */
+.bb-progress-track {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: rgba(16, 20, 21, 0.08);
+  z-index: 120;
+}
+
+.bb-progress-bar {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, var(--bb-teal-deep), var(--bb-teal), var(--bb-gold));
+  transition: width 0.12s linear;
+}
+
+.bb-topbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(244, 241, 234, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(24, 90, 89, 0.16);
+  padding: 0.55rem clamp(0.8rem, 3vw, 2.2rem);
+}
+
+.bb-topbar-inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.bb-brand-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  text-decoration: none;
+  color: var(--bb-obsidian);
+  flex-shrink: 0;
+}
+
+.bb-brand-link img {
+  width: 34px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.bb-brand-title {
+  font-family: var(--font-en);
+  font-size: 0.88rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+}
+
+.bb-breadcrumb {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.76rem;
+  color: var(--bb-muted);
+}
+
+.bb-breadcrumb a {
+  color: var(--bb-teal-deep);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.bb-breadcrumb a:hover {
+  text-decoration: underline;
+}
+
+.bb-chapter-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  overflow-x: auto;
+  scrollbar-width: none;
+  max-width: 100%;
+  padding-bottom: 2px;
+}
+
+.bb-chapter-nav::-webkit-scrollbar {
+  display: none;
+}
+
+.bb-chapter-nav a {
+  text-decoration: none;
+  font-size: 0.74rem;
+  font-weight: 600;
+  color: #3D4E4B;
+  padding: 0.28rem 0.65rem;
+  border-radius: 999px;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  transition: all 0.22s ease;
+}
+
+.bb-chapter-nav a:hover,
+.bb-chapter-nav a.is-active {
+  background: var(--bb-teal-deep);
+  color: var(--bb-ivory);
+  border-color: rgba(212, 175, 55, 0.55);
+}
+
+.bb-home-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.3rem 0.85rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--bb-gold) 0%, #F3DC8B 100%);
+  color: #142220;
+  font-size: 0.75rem;
+  font-weight: 800;
+  text-decoration: none;
+  border: 1px solid rgba(24, 90, 89, 0.3);
+  white-space: nowrap;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.bb-home-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(212, 175, 55, 0.35);
+}
+
+/* ==========================================================================
+   Editorial Book Container & Page Sheets (Exact Magazine Proportions)
+   ========================================================================== */
+.bb-book-container {
+  max-width: 1060px;
+  margin: clamp(1rem, 2.5vw, 2.2rem) auto 3.5rem;
+  padding: 0 clamp(0.65rem, 2vw, 1.5rem);
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3.2vw, 2.8rem);
+}
+
+.bb-sheet {
+  position: relative;
+  background: var(--bb-ivory);
+  color: var(--bb-obsidian);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow:
+    0 24px 60px rgba(16, 20, 21, 0.14),
+    0 2px 6px rgba(16, 20, 21, 0.06);
+  border: 1px solid rgba(16, 20, 21, 0.08);
+  padding: clamp(1.4rem, 3.5vw, 3.1rem) clamp(1.2rem, 3.8vw, 3.2rem);
+  scroll-margin-top: 76px;
+}
+
+.bb-sheet--dark {
+  background: var(--bb-obsidian);
+  color: var(--bb-ivory);
+  border-color: rgba(212, 175, 55, 0.2);
+}
+
+/* Reveal Animation */
+.bb-reveal {
+  opacity: 0;
+  transform: translateY(26px);
+  transition: opacity 0.78s var(--ease-luxury), transform 0.78s var(--ease-luxury);
+}
+
+.bb-reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bb-reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Page Header & Footer Bars (Matching PDF 01/09 .. 09/10) */
+.bb-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: clamp(1.4rem, 3vw, 2.3rem);
+  direction: ltr;
+}
+
+.bb-page-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+.bb-page-brand img {
+  width: 44px;
+  height: 29px;
+  object-fit: contain;
+}
+
+.bb-page-brand-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.bb-page-brand-text strong {
+  font-family: var(--font-en);
+  font-size: 0.88rem;
+  letter-spacing: 0.12em;
+  color: var(--bb-teal-deep);
+}
+
+.bb-sheet--dark .bb-page-brand-text strong {
+  color: var(--bb-ivory);
+}
+
+.bb-page-brand-text span {
+  font-family: var(--font-en);
+  font-size: 0.56rem;
+  letter-spacing: 0.14em;
+  color: var(--bb-muted);
+}
+
+.bb-sheet--dark .bb-page-brand-text span {
+  color: rgba(244, 241, 234, 0.72);
+}
+
+.bb-page-rule {
+  flex: 1;
+  height: 1px;
+  background: var(--bb-line);
+}
+
+.bb-sheet--dark .bb-page-rule {
+  background: var(--bb-line-dark);
+}
+
+.bb-page-num {
+  font-family: var(--font-en);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--bb-teal-deep);
+  flex-shrink: 0;
+}
+
+.bb-sheet--dark .bb-page-num {
+  color: var(--bb-ivory);
+}
+
+.bb-page-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-top: clamp(1.6rem, 3.2vw, 2.5rem);
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--bb-line);
+  direction: ltr;
+}
+
+.bb-sheet--dark .bb-page-footer {
+  border-top-color: var(--bb-line-dark);
+}
+
+.bb-footer-mark {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.bb-footer-mark::before {
+  content: '';
+  width: 34px;
+  height: 2.5px;
+  background: var(--bb-teal-deep);
+  margin-bottom: 4px;
+}
+
+.bb-sheet--dark .bb-footer-mark::before {
+  background: var(--bb-teal);
+}
+
+.bb-footer-mark strong {
+  font-family: var(--font-serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.18em;
+}
+
+.bb-footer-mark span {
+  font-family: var(--font-en);
+  font-size: 0.64rem;
+  letter-spacing: 0.2em;
+  color: var(--bb-muted);
+}
+
+.bb-sheet--dark .bb-footer-mark span {
+  color: var(--bb-silver);
+}
+
+/* Editorial Display Typography */
+.bb-kicker {
+  font-family: var(--font-en);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  color: var(--bb-teal);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 0.5rem;
+  direction: ltr;
+}
+
+.bb-serif-title {
+  font-family: var(--font-serif);
+  font-size: clamp(2rem, 4.4vw, 3.4rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: 0.04em;
+  color: var(--bb-obsidian);
+  direction: ltr;
+}
+
+.bb-serif-title .is-teal {
+  color: var(--bb-teal-deep);
+  display: block;
+}
+
+.bb-sheet--dark .bb-serif-title {
+  color: var(--bb-ivory);
+}
+
+.bb-sheet--dark .bb-serif-title .is-teal {
+  color: var(--bb-teal);
+}
+
+.bb-fa-subtitle {
+  font-size: clamp(1.1rem, 2.1vw, 1.55rem);
+  font-weight: 800;
+  color: var(--bb-obsidian);
+  margin-top: 0.6rem;
+}
+
+.bb-sheet--dark .bb-fa-subtitle {
+  color: var(--bb-ivory);
+}
+
+.bb-accent-bar {
+  width: 46px;
+  height: 3px;
+  background: var(--bb-teal);
+  margin: 0.85rem 0 1.2rem;
+}
+
+/* Zoomable Photo Interaction */
+.bb-zoomable {
+  cursor: zoom-in;
+  position: relative;
+  overflow: hidden;
+  border-radius: 6px;
+}
+
+.bb-zoomable img {
+  transition: transform 0.65s var(--ease-luxury);
+}
+
+.bb-zoomable:hover img {
+  transform: scale(1.035);
+}
+
+/* ==========================================================================
+   PAGE 1 — COVER
+   ========================================================================== */
+.bb-cover {
+  padding: 0;
+  min-height: min(88vh, 880px);
+  display: grid;
+  grid-template-columns: 1fr;
+  background: #F4EFE6;
+}
+
+.bb-cover-visual {
+  position: relative;
+  width: 100%;
+  min-height: min(88vh, 880px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(1.5rem, 4vw, 3.2rem);
+  background: #F4EFE6;
+}
+
+.bb-cover-bg-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  z-index: 1;
+}
+
+.bb-cover-gradient {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(244, 241, 234, 0.88) 0%,
+    rgba(244, 241, 234, 0.35) 38%,
+    rgba(244, 241, 234, 0.0) 68%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bb-cover-top {
+  position: relative;
+  z-index: 3;
+  direction: ltr;
+  max-width: 390px;
+}
+
+.bb-cover-logo {
+  width: clamp(78px, 10vw, 112px);
+  height: auto;
+  margin-bottom: 0.6rem;
+}
+
+.bb-cover-h1 {
+  font-family: var(--font-en);
+  font-size: clamp(1.85rem, 3.8vw, 2.8rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--bb-teal-deep);
+  line-height: 1.1;
+}
+
+.bb-cover-sub {
+  font-family: var(--font-en);
+  font-size: clamp(0.68rem, 1.1vw, 0.86rem);
+  letter-spacing: 0.18em;
+  color: #364543;
+  margin-top: 0.25rem;
+}
+
+.bb-cover-tag {
+  font-family: var(--font-en);
+  font-size: clamp(0.76rem, 1.15vw, 0.92rem);
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  color: var(--bb-teal);
+  margin-top: 0.45rem;
+}
+
+.bb-cover-bottom {
+  position: relative;
+  z-index: 3;
+  direction: ltr;
+  margin-top: auto;
+  padding-top: 12rem;
+}
+
+.bb-cover-credit-label {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--bb-teal-deep);
+}
+
+.bb-cover-credit-name {
+  font-family: var(--font-en);
+  font-size: 0.96rem;
+  font-weight: 700;
+  color: var(--bb-obsidian);
+  margin-top: 0.15rem;
+}
+
+.bb-cover-studio {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.84rem;
+  color: #3B4947;
+  margin-top: 0.35rem;
+}
+
+/* ==========================================================================
+   PAGE 2 — 01 / 09 BRAND INTRO (Visual Lookbook Grid, Duplicate Text Removed)
+   ========================================================================== */
+.bb-intro-head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+  margin-bottom: 1.5rem;
+  direction: ltr;
+}
+
+.bb-intro-top-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr 0.85fr;
+  gap: clamp(0.65rem, 1.5vw, 1.1rem);
+  align-items: end;
+  direction: ltr;
+}
+
+.bb-intro-card {
+  background: #fff;
+  padding: 5px;
+  border-radius: 6px;
+  box-shadow: 0 10px 26px rgba(16, 20, 21, 0.1);
+}
+
+.bb-intro-card img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 3px;
+}
+
+.bb-intro-bottom-grid {
+  display: grid;
+  grid-template-columns: 0.85fr 1.65fr;
+  gap: clamp(0.65rem, 1.5vw, 1.1rem);
+  margin-top: clamp(0.75rem, 1.6vw, 1.2rem);
+  align-items: stretch;
+  direction: ltr;
+}
+
+.bb-intro-sheet-card {
+  background: #FFFFFF;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(16, 20, 21, 0.08);
+  box-shadow: 0 8px 20px rgba(16, 20, 21, 0.07);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bb-intro-sheet-card img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.bb-designer-credit {
+  text-align: center;
+  font-size: clamp(0.9rem, 1.4vw, 1.08rem);
+  font-weight: 800;
+  color: var(--bb-teal-deep);
+  margin-top: 1.1rem;
+}
+
+/* ==========================================================================
+   PAGE 3 — 02 / 09 OUR STORY (Unique History + Silver Model, Duplicate Mission/Vision Removed)
+   ========================================================================== */
+.bb-story-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.5rem, 3.5vw, 3rem);
+  align-items: center;
+  direction: ltr;
+}
+
+.bb-story-copy {
+  direction: rtl;
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bb-story-heading-fa {
+  font-size: clamp(1.2rem, 2.2vw, 1.65rem);
+  font-weight: 800;
+  color: var(--bb-teal-deep);
+  line-height: 1.45;
+}
+
+.bb-story-copy p {
+  font-size: clamp(0.9rem, 1.15vw, 1.02rem);
+  color: #2B3836;
+  text-align: justify;
+  line-height: 1.95;
+}
+
+.bb-story-year-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  align-self: flex-start;
+  padding: 0.25rem 0.8rem;
+  border-radius: 999px;
+  background: rgba(14, 147, 157, 0.12);
+  border: 1px solid rgba(14, 147, 157, 0.32);
+  color: var(--bb-teal-deep);
+  font-size: 0.8rem;
+  font-weight: 800;
+}
+
+.bb-story-model-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bb-story-model-wrap img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 10px;
+}
+
+/* ==========================================================================
+   PAGE 4 — 03 / 09 BRAND PHILOSOPHY (BEYOND THE THREAD)
+   ========================================================================== */
+.bb-philosophy {
+  padding: 0;
+  min-height: min(82vh, 800px);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  background: #0B1B1D;
+}
+
+.bb-philosophy-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 15%;
+  z-index: 1;
+}
+
+.bb-philosophy-tint {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 68, 74, 0.88) 0%,
+    rgba(10, 52, 58, 0.52) 45%,
+    rgba(10, 20, 22, 0.35) 100%
+  );
+  z-index: 2;
+  pointer-events: none;
+}
+
+.bb-philosophy-inner {
+  position: relative;
+  z-index: 3;
+  padding: clamp(1.4rem, 3.5vw, 3.1rem) clamp(1.2rem, 3.8vw, 3.2rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: min(82vh, 800px);
+}
+
+.bb-philosophy-top {
+  direction: ltr;
+  max-width: 520px;
+}
+
+.bb-philosophy-top .bb-serif-title .is-italic {
+  font-style: italic;
+  color: #CFE3E4;
+  display: block;
+}
+
+.bb-philosophy-box {
+  margin-top: auto;
+  max-width: 490px;
+  background: rgba(12, 22, 24, 0.76);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-right: 3px solid var(--bb-teal);
+  padding: clamp(1.1rem, 2.4vw, 1.7rem);
+  border-radius: 6px;
+  direction: rtl;
+  text-align: right;
+  margin-bottom: 1.6rem;
+}
+
+.bb-philosophy-box p {
+  color: var(--bb-ivory);
+  font-size: clamp(0.92rem, 1.2vw, 1.05rem);
+  line-height: 1.9;
+}
+
+.bb-philosophy-quote-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  border-top: 1px solid rgba(244, 241, 234, 0.25);
+  padding-top: 0.85rem;
+  direction: ltr;
+}
+
+.bb-philosophy-quote-bar blockquote {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(0.92rem, 1.45vw, 1.18rem);
+  color: var(--bb-ivory);
+}
+
+.bb-philosophy-quote-bar span {
+  font-family: var(--font-en);
+  font-size: 0.78rem;
+  letter-spacing: 0.22em;
+  color: rgba(244, 241, 234, 0.8);
+}
+
+/* ==========================================================================
+   PAGE 5 — 04 / 09 THE DNA OF MODESHAHR (4 Couture Photos + 4 Clean Pillar Badges)
+   ========================================================================== */
+.bb-dna-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.85fr;
+  gap: clamp(1rem, 2.4vw, 1.8rem);
+  direction: ltr;
+  align-items: start;
+}
+
+.bb-dna-left {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.2vw, 1.6rem);
+}
+
+.bb-dna-right {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.9rem, 2vw, 1.4rem);
+}
+
+.bb-dna-teal-band {
+  background: linear-gradient(135deg, var(--bb-teal) 0%, var(--bb-teal-deep) 100%);
+  padding: clamp(0.9rem, 2vw, 1.4rem);
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 0.95fr 1fr;
+  gap: 1rem;
+  align-items: center;
+}
+
+.bb-dna-pillar {
+  border-right: 2px solid var(--bb-teal);
+  padding-right: 0.95rem;
+  direction: rtl;
+  text-align: right;
+}
+
+.bb-dna-teal-band .bb-dna-pillar {
+  background: rgba(16, 20, 21, 0.88);
+  padding: 1rem 1.1rem;
+  border-radius: 6px;
+}
+
+.bb-dna-num {
+  font-family: var(--font-serif);
+  font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+  color: var(--bb-teal);
+  line-height: 1;
+  display: block;
+}
+
+.bb-dna-en {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  letter-spacing: 0.16em;
+  color: rgba(244, 241, 234, 0.85);
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.bb-dna-fa {
+  font-size: clamp(0.98rem, 1.4vw, 1.15rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  margin-top: 0.25rem;
+}
+
+.bb-dna-photo {
+  border: 1px solid rgba(244, 241, 234, 0.18);
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0A0D0E;
+}
+
+.bb-dna-photo img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+
+/* ==========================================================================
+   PAGE 6 — 05 / 09 COLOR IDENTITY (THE COLORS OF MODESHAHR)
+   ========================================================================== */
+.bb-color-top {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: clamp(1rem, 2.4vw, 1.8rem);
+  direction: ltr;
+  align-items: stretch;
+}
+
+.bb-swatch {
+  position: relative;
+  border-radius: 6px;
+  padding: clamp(1.1rem, 2.2vw, 1.65rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 195px;
+  cursor: pointer;
+  transition: transform 0.28s var(--ease-luxury), box-shadow 0.28s ease;
+}
+
+.bb-swatch:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 32px rgba(16, 20, 21, 0.16);
+}
+
+.bb-swatch-role {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.bb-swatch-name {
+  font-family: var(--font-serif);
+  font-size: clamp(1.35rem, 2.4vw, 1.9rem);
+  margin-top: 2rem;
+  line-height: 1.15;
+}
+
+.bb-swatch-hex {
+  font-family: var(--font-en);
+  font-size: 0.92rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin-top: 0.25rem;
+}
+
+.bb-swatch-desc {
+  font-family: var(--font-fa);
+  font-size: 0.84rem;
+  margin-top: 0.35rem;
+  direction: rtl;
+  text-align: right;
+  opacity: 0.92;
+}
+
+.bb-swatch--teal {
+  background: #0E939D;
+  color: #FFFFFF;
+  min-height: 290px;
+}
+
+.bb-color-mid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.9fr 0.9fr;
+  gap: clamp(0.8rem, 1.8vw, 1.3rem);
+  margin-top: clamp(0.9rem, 2vw, 1.4rem);
+  direction: ltr;
+}
+
+.bb-swatch--obsidian {
+  background: #101415;
+  color: #FFFFFF;
+}
+
+.bb-swatch--silver {
+  background: #B9B9B5;
+  color: #101415;
+}
+
+.bb-swatch--ivory {
+  background: #F4F1EA;
+  color: #101415;
+  border: 1px solid rgba(16, 20, 21, 0.22);
+}
+
+.bb-swatch--gold {
+  margin-top: clamp(0.9rem, 2vw, 1.4rem);
+  background: #D4AF37;
+  color: #101415;
+  min-height: auto;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  padding: 1.1rem 1.5rem;
+  direction: ltr;
+}
+
+.bb-swatch--gold .bb-swatch-name {
+  margin-top: 0;
+  font-size: clamp(1.1rem, 2vw, 1.4rem);
+}
+
+.bb-pairings {
+  margin-top: 1.8rem;
+}
+
+.bb-pairings-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.55rem;
+  border-bottom: 1px solid var(--bb-line);
+  margin-bottom: 1rem;
+  direction: ltr;
+}
+
+.bb-pairings-head span:first-child {
+  font-family: var(--font-en);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+}
+
+.bb-pairings-head span:last-child {
+  font-size: 0.86rem;
+  font-weight: 800;
+  color: var(--bb-teal);
+}
+
+.bb-pairing-row {
+  display: grid;
+  grid-template-columns: 1.35fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  direction: ltr;
+}
+
+.bb-pairing-bar {
+  height: 14px;
+  border-radius: 3px;
+  overflow: hidden;
+  display: flex;
+  border: 1px solid rgba(16, 20, 21, 0.18);
+}
+
+.bb-pairing-label {
+  font-family: var(--font-en);
+  font-size: 0.78rem;
+  color: #2B3836;
+  line-height: 1.45;
+}
+
+/* ==========================================================================
+   PAGE 7 — 06 / 09 TYPOGRAPHY SYSTEM (THE ART OF TYPE)
+   ========================================================================== */
+.bb-type-header-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  border-bottom: 1.5px solid var(--bb-obsidian);
+  margin-bottom: 1.7rem;
+  direction: ltr;
+}
+
+.bb-type-grid-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.2rem, 3vw, 2.4rem);
+  margin-bottom: 1.8rem;
+  direction: ltr;
+}
+
+.bb-type-col-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid var(--bb-line);
+  margin-bottom: 0.85rem;
+  direction: ltr;
+}
+
+.bb-type-col-head .en {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--bb-teal);
+}
+
+.bb-type-col-head .fa {
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--bb-obsidian);
+}
+
+.bb-type-sample-title {
+  font-family: var(--font-en);
+  font-size: clamp(1.25rem, 2.2vw, 1.6rem);
+  font-weight: 700;
+  color: var(--bb-obsidian);
+  margin-bottom: 0.35rem;
+}
+
+.bb-type-sample-serif {
+  font-family: var(--font-serif);
+  font-size: clamp(1.3rem, 2.2vw, 1.65rem);
+  color: var(--bb-obsidian);
+}
+
+.bb-type-desc {
+  font-size: 0.84rem;
+  color: var(--bb-muted);
+  direction: rtl;
+  text-align: right;
+}
+
+.bb-charset-en {
+  font-family: var(--font-serif);
+  font-size: 0.96rem;
+  letter-spacing: 0.16em;
+  line-height: 1.85;
+  color: var(--bb-obsidian);
+}
+
+.bb-charset-fa {
+  font-size: clamp(1rem, 1.55vw, 1.25rem);
+  letter-spacing: 0.06em;
+  text-align: center;
+  padding: 0.9rem 0;
+  color: var(--bb-obsidian);
+  direction: rtl;
+}
+
+.bb-weights-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin: 1.5rem 0 2rem;
+  direction: ltr;
+}
+
+.bb-weight-card {
+  border-top: 2px solid var(--bb-teal);
+  padding-top: 0.7rem;
+}
+
+.bb-weight-tag {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--bb-obsidian);
+  display: block;
+  margin-bottom: 0.45rem;
+}
+
+.bb-weight-fa {
+  font-size: 1.05rem;
+  text-align: right;
+  direction: rtl;
+  color: var(--bb-obsidian);
+}
+
+.bb-weight-en {
+  font-family: var(--font-en);
+  font-size: 0.84rem;
+  color: var(--bb-muted);
+  margin-top: 0.25rem;
+}
+
+.bb-specimen-box {
+  border-right: 3px solid var(--bb-teal);
+  padding: 1rem 1.35rem;
+  background: rgba(16, 20, 21, 0.03);
+  border-radius: 6px;
+  direction: rtl;
+  text-align: right;
+}
+
+.bb-specimen-box h3 {
+  font-size: clamp(1.35rem, 2.6vw, 2rem);
+  font-weight: 800;
+  color: var(--bb-obsidian);
+  margin-bottom: 0.5rem;
+}
+
+.bb-specimen-box p {
+  font-size: 0.94rem;
+  color: #354442;
+  line-height: 1.9;
+}
+
+/* ==========================================================================
+   PAGE 8 — 07 / 10 LOGO ANATOMY
+   ========================================================================== */
+.bb-anatomy {
+  position: relative;
+  overflow: hidden;
+}
+
+.bb-anatomy-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.92;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.bb-anatomy-content {
+  position: relative;
+  z-index: 2;
+}
+
+.bb-anatomy-stage {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: clamp(1.2rem, 3vw, 2.6rem);
+  align-items: center;
+  margin: 1.6rem 0 2.2rem;
+  direction: ltr;
+}
+
+.bb-anatomy-parts {
+  border: 1.5px dashed rgba(24, 90, 89, 0.36);
+  border-radius: 8px;
+  padding: 1rem 0.75rem;
+  background: rgba(244, 241, 234, 0.85);
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  align-items: center;
+}
+
+.bb-anatomy-part {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  text-align: center;
+}
+
+.bb-anatomy-part img {
+  height: 54px;
+  width: auto;
+  object-fit: contain;
+}
+
+.bb-anatomy-part span {
+  font-family: var(--font-en);
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: #2C3D3B;
+}
+
+.bb-anatomy-blueprint {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(1.5rem, 3.5vw, 3rem);
+}
+
+.bb-anatomy-blueprint::before {
+  content: '';
+  position: absolute;
+  width: min(320px, 76%);
+  aspect-ratio: 1 / 1;
+  border: 1.5px dashed rgba(24, 90, 89, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.bb-anatomy-blueprint img {
+  position: relative;
+  z-index: 2;
+  width: min(340px, 88%);
+  height: auto;
+}
+
+.bb-logo-detail-row {
+  display: grid;
+  grid-template-columns: 0.85fr 1fr 1fr;
+  gap: 1.2rem;
+  align-items: center;
+  padding: 1.4rem 1.2rem;
+  background: rgba(244, 241, 234, 0.9);
+  border-top: 1px solid var(--bb-line);
+  border-radius: 8px;
+  direction: ltr;
+  margin-bottom: 3rem;
+}
+
+.bb-detail-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+.bb-detail-item img {
+  height: 82px;
+  width: auto;
+  object-fit: contain;
+}
+
+.bb-detail-item span {
+  font-family: var(--font-en);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #2B3A38;
+}
+
+/* ==========================================================================
+   PAGE 9 — 08 / 10 LOGO GUIDELINES
+   ========================================================================== */
+.bb-guidelines-layout {
+  display: grid;
+  grid-template-columns: 1.38fr 0.62fr;
+  gap: clamp(1.2rem, 2.8vw, 2.2rem);
+  align-items: stretch;
+  direction: ltr;
+}
+
+.bb-guidelines-col {
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+}
+
+.bb-guideline-top-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.3rem;
+}
+
+.bb-guide-label-en {
+  font-family: var(--font-en);
+  font-size: 0.74rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  color: var(--bb-teal-deep);
+  display: block;
+}
+
+.bb-guide-label-fa {
+  font-size: 0.88rem;
+  font-weight: 800;
+  color: var(--bb-obsidian);
+  display: block;
+  margin-bottom: 0.7rem;
+  direction: rtl;
+  text-align: right;
+}
+
+.bb-clearspace-wrap {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+}
+
+/* Exact proportional clear-space diagram matching official Brand Book PDF (equal X margin on all 4 sides) */
+.bb-clearspace-box {
+  --cs-x: 26px;
+  position: relative;
+  display: inline-flex;
+  width: fit-content;
+  max-width: 100%;
+  border: 1.5px dashed var(--bb-teal-deep);
+  padding: var(--cs-x);
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.62);
+  border-radius: 3px;
+}
+
+.bb-clearspace-box img {
+  width: 132px;
+  height: auto;
+  display: block;
+}
+
+.bb-x-mark {
+  position: absolute;
+  width: var(--cs-x);
+  height: var(--cs-x);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-en);
+  font-size: 0.68rem;
+  font-weight: 800;
+  line-height: 1;
+  color: var(--bb-teal-deep);
+  pointer-events: none;
+}
+
+.bb-x-tl { top: 0; left: 0; }
+.bb-x-tr { top: 0; right: 0; }
+.bb-x-bl { bottom: 0; left: 0; }
+.bb-x-br { bottom: 0; right: 0; }
+
+.bb-size-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+}
+
+.bb-size-pair {
+  display: flex;
+  align-items: flex-end;
+  gap: 1.4rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--bb-line);
+}
+
+.bb-size-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.bb-size-item span {
+  font-family: var(--font-en);
+  font-size: 0.75rem;
+  color: #364543;
+}
+
+.bb-size-max {
+  font-family: var(--font-en);
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: var(--bb-teal-deep);
+}
+
+.bb-variations-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.7rem;
+}
+
+.bb-var-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.45rem;
+  padding: 0.8rem 0.5rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(16, 20, 21, 0.08);
+  text-align: center;
+}
+
+.bb-var-card--dark {
+  background: var(--bb-obsidian);
+  color: #FFFFFF;
+}
+
+.bb-var-card img {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+}
+
+.bb-var-card span {
+  font-family: var(--font-en);
+  font-size: 0.7rem;
+  font-weight: 600;
+  line-height: 1.3;
+}
+
+.bb-incorrect-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.65rem;
+}
+
+.bb-bad-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.75rem 0.35rem;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid rgba(196, 56, 56, 0.25);
+  text-align: center;
+}
+
+.bb-bad-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 1.5px solid #C43838;
+  color: #C43838;
+  font-size: 0.62rem;
+  font-weight: 800;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #FFF;
+}
+
+.bb-bad-card img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
+.bb-bad-distort {
+  transform: scaleX(1.38) scaleY(0.62);
+}
+
+.bb-bad-rotate {
+  transform: rotate(-18deg);
+}
+
+.bb-bad-busy {
+  padding: 4px 6px;
+  border-radius: 4px;
+  background: repeating-linear-gradient(
+    45deg,
+    #185A59,
+    #185A59 5px,
+    #D4AF37 5px,
+    #D4AF37 10px
+  );
+}
+
+.bb-bad-card span {
+  font-family: var(--font-en);
+  font-size: 0.68rem;
+  color: #364543;
+}
+
+.bb-guidelines-mannequin {
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bb-guidelines-mannequin img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* ==========================================================================
+   PAGE 10 — 09 / 10 DIGITAL BRAND EXPERIENCE
+   ========================================================================== */
+.bb-exp-grid {
+  display: grid;
+  grid-template-columns: 0.82fr 1.35fr 0.72fr;
+  gap: clamp(0.8rem, 2vw, 1.35rem);
+  align-items: center;
+  margin: 1.6rem 0 2rem;
+  direction: ltr;
+}
+
+.bb-phone-frame {
+  background: #141819;
+  padding: 10px;
+  border-radius: 26px;
+  box-shadow: 0 20px 44px rgba(16, 20, 21, 0.28);
+  border: 2px solid #2A3234;
+}
+
+.bb-phone-frame img {
+  border-radius: 18px;
+  width: 100%;
+  height: auto;
+}
+
+.bb-exp-center {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.bb-posters-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.85rem;
+}
+
+.bb-poster-card {
+  background: #101415;
+  padding: 6px;
+  border-radius: 8px;
+  box-shadow: 0 12px 26px rgba(16, 20, 21, 0.18);
+}
+
+.bb-poster-card img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+}
+
+.bb-laptop-mockup {
+  background: #1B2022;
+  border-radius: 14px 14px 4px 4px;
+  padding: 10px 10px 14px;
+  box-shadow: 0 22px 45px rgba(16, 20, 21, 0.25);
+  border: 1.5px solid #353D40;
+}
+
+.bb-laptop-screen {
+  display: grid;
+  grid-template-columns: 0.95fr 1.05fr;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #0E1314;
+}
+
+.bb-laptop-screen-left {
+  background: #F4F1EA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px;
+}
+
+.bb-laptop-screen-left img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.bb-laptop-screen-right {
+  background: #0F1718;
+  color: #F4F1EA;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.bb-laptop-screen-right img {
+  width: 78px;
+  height: auto;
+}
+
+.bb-laptop-screen-right span {
+  font-family: var(--font-en);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: #D7E5E5;
+  border-bottom: 2px solid var(--bb-teal);
+  padding-bottom: 0.35rem;
+}
+
+.bb-laptop-base {
+  height: 11px;
+  margin: 0 -14px -14px;
+  background: linear-gradient(180deg, #C7C9C8 0%, #8E9291 100%);
+  border-radius: 0 0 12px 12px;
+}
+
+.bb-tablet-frame {
+  background: #141819;
+  padding: 10px;
+  border-radius: 20px;
+  box-shadow: 0 18px 36px rgba(16, 20, 21, 0.22);
+}
+
+.bb-tablet-screen {
+  background: #EFF8F8;
+  border-radius: 12px;
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.bb-tablet-screen img {
+  border-radius: 8px;
+  width: 100%;
+  height: auto;
+}
+
+.bb-exp-caption {
+  border-top: 1px solid var(--bb-line);
+  border-right: 3px solid var(--bb-teal);
+  padding: 1rem 1.2rem 0.2rem;
+  direction: rtl;
+  text-align: right;
+}
+
+.bb-exp-caption-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+
+.bb-exp-caption-head h3 {
+  font-size: 1rem;
+  font-weight: 800;
+  color: var(--bb-obsidian);
+}
+
+.bb-exp-caption-head span {
+  font-family: var(--font-en);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  color: var(--bb-teal);
+}
+
+.bb-exp-caption p {
+  font-size: 0.92rem;
+  color: #2B3836;
+  line-height: 1.9;
+}
+
+/* ==========================================================================
+   PAGE 11 — BACK COVER
+   ========================================================================== */
+.bb-backcover {
+  position: relative;
+  min-height: min(76vh, 720px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.bb-backcover-bg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.bb-backcover-inner {
+  position: relative;
+  z-index: 2;
+  max-width: 580px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.15rem;
+  padding: 2rem 1.2rem;
+  background: rgba(244, 241, 234, 0.72);
+  backdrop-filter: blur(4px);
+  border-radius: 16px;
+}
+
+.bb-backcover-logo {
+  width: clamp(160px, 24vw, 225px);
+  height: auto;
+}
+
+.bb-backcover-divider {
+  width: 72px;
+  height: 2.5px;
+  background: var(--bb-teal);
+}
+
+.bb-backcover-en {
+  font-family: var(--font-serif);
+  font-size: clamp(0.96rem, 1.4vw, 1.12rem);
+  color: var(--bb-obsidian);
+  line-height: 1.75;
+  direction: ltr;
+}
+
+.bb-backcover-pillars {
+  font-family: var(--font-en);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: var(--bb-teal-deep);
+  direction: ltr;
+}
+
+.bb-backcover-actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 0.4rem;
+}
+
+.bb-cta-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, var(--bb-teal-deep) 0%, #0F3E3D 100%);
+  color: var(--bb-gold-light);
+  border: 1.5px solid var(--bb-gold);
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s ease, background 0.2s ease;
+}
+
+.bb-cta-primary:hover {
+  transform: translateY(-2px);
+  background: var(--bb-gold);
+  color: #142220;
+}
+
+.bb-cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.88);
+  color: var(--bb-teal-deep);
+  border: 1.5px solid rgba(24, 90, 89, 0.35);
+  font-size: 0.84rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.bb-cta-secondary:hover {
+  transform: translateY(-2px);
+  border-color: var(--bb-teal);
+}
+
+.bb-backcover-colophon {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 0.82rem;
+  color: #3E4C4A;
+  margin-top: 0.6rem;
+  direction: ltr;
+}
+
+/* ==========================================================================
+   Toast & Editorial Lightbox
+   ========================================================================== */
+.bb-toast {
+  position: fixed;
+  bottom: 22px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--bb-obsidian);
+  color: var(--bb-gold-light);
+  border: 1px solid var(--bb-gold);
+  padding: 0.5rem 1.2rem;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  font-weight: 700;
+  opacity: 0;
+  pointer-events: none;
+  z-index: 220;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.bb-toast.is-show {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+.bb-lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 210;
+  background: rgba(12, 22, 22, 0.9);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.2rem;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 0.28s ease, visibility 0.28s ease;
+}
+
+.bb-lightbox.is-open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.bb-lightbox-inner {
+  max-width: min(92vw, 760px);
+  max-height: 90dvh;
+  background: var(--bb-ivory);
+  border: 1.5px solid var(--bb-gold);
+  border-radius: 18px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.bb-lightbox-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.bb-lightbox-close {
+  background: var(--bb-teal-deep);
+  color: var(--bb-gold-light);
+  border: 1px solid var(--bb-gold);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.bb-lightbox-inner img {
+  max-height: 68dvh;
+  max-width: 100%;
+  width: auto;
+  border-radius: 10px;
+}
+
+.bb-lightbox-caption {
+  font-size: 0.86rem;
+  font-weight: 700;
+  color: var(--bb-teal-deep);
+  text-align: center;
+}
+
+/* ==========================================================================
+   Responsive Breakpoints (Tablet & Mobile — Zero Overflow / Perfect Ratios)
+   ========================================================================== */
+@media (max-width: 860px) {
+  .bb-story-grid,
+  .bb-dna-grid,
+  .bb-color-top,
+  .bb-type-grid-2,
+  .bb-anatomy-stage,
+  .bb-guidelines-layout,
+  .bb-exp-grid,
+  .bb-pairing-row {
+    grid-template-columns: 1fr;
+  }
+
+  .bb-intro-top-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bb-intro-top-grid > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .bb-intro-bottom-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bb-color-mid {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bb-color-mid > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .bb-dna-teal-band {
+    grid-template-columns: 1fr;
+  }
+
+  .bb-logo-detail-row {
+    grid-template-columns: 1fr;
+    margin-bottom: 1.5rem;
+  }
+
+  .bb-guideline-top-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .bb-variations-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bb-incorrect-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .bb-guidelines-mannequin {
+    max-height: 440px;
+  }
+
+  .bb-weights-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .bb-cover-gradient {
+    background: linear-gradient(
+      180deg,
+      rgba(244, 241, 234, 0.86) 0%,
+      rgba(244, 241, 234, 0.25) 45%,
+      rgba(244, 241, 234, 0.88) 100%
+    );
+  }
+
+  .bb-cover-bottom {
+    padding-top: 18rem;
+  }
+}
+
+@media (max-width: 520px) {
+  .bb-breadcrumb {
+    display: none;
+  }
+
+  .bb-incorrect-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .bb-laptop-screen {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ==========================================================================
+   ترازبندی دقیق جلد (چپ‌چین در فضای خالی عاجی مثل PDF)، صفحه فلسفه و نوار تک‌خطی دسکتاپ
+   ========================================================================== */
+.bb-topbar-inner {
+  max-width: 1280px;
+  flex-wrap: nowrap;
+  gap: 0.55rem;
+}
+
+.bb-chapter-nav a {
+  font-size: 0.7rem;
+  padding: 0.24rem 0.52rem;
+}
+
+.bb-cover-visual {
+  direction: ltr;
+  align-items: flex-start;
+  text-align: left;
+  aspect-ratio: 896 / 1200;
+  min-height: 0;
+  width: 100%;
+}
+
+.bb-cover-top {
+  max-width: 340px;
+  text-align: left;
+}
+
+.bb-cover-h1 {
+  font-size: clamp(1.55rem, 2.8vw, 2.35rem);
+}
+
+.bb-cover-bottom {
+  text-align: left;
+  padding-top: clamp(6rem, 18vw, 15rem);
+}
+
+.bb-philosophy-inner {
+  direction: ltr;
+  align-items: flex-start;
+}
+
+.bb-philosophy-inner > div {
+  width: 100%;
+}
+
+@media (max-width: 1020px) {
+  .bb-topbar-inner {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 640px) {
+  .bb-cover-visual {
+    aspect-ratio: auto;
+    min-height: 540px;
+  }
+}
+
+
+/* ==========================================================================
+   Shared MODESHAHR Site Footer (Unified Across All Pages)
+   ========================================================================== */
+.site-footer.site-footer--static {
+  position: relative;
+  margin-top: 2rem;
+  background: linear-gradient(180deg, #182422 0%, #101918 100%);
+  color: #EFE9DF;
+  border-top: 2px solid #D4AF37;
+  padding: clamp(1.5rem, 3vw, 2.4rem) clamp(1rem, 3vw, 2.5rem);
+  box-shadow: 0 -14px 36px rgba(0, 0, 0, 0.18);
+  direction: rtl;
+  font-family: 'Vazirmatn', system-ui, sans-serif;
+}
+
+.site-footer--static .footer-inner {
+  width: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.15rem;
+}
+
+.site-footer--static .footer-top-row {
+  display: grid;
+  grid-template-columns: 1.35fr 0.95fr 1.2fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+.site-footer--static .footer-brand-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.site-footer--static .footer-brand-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.site-footer--static .footer-logo-img {
+  width: 44px;
+  height: 36px;
+  object-fit: contain;
+}
+
+.site-footer--static .footer-brand-title {
+  font-family: var(--font-en, 'Montserrat', sans-serif);
+  font-size: clamp(0.88rem, 1.25vw, 1.08rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #D4AF37;
+  direction: ltr;
+  text-align: right;
+}
+
+.site-footer--static .footer-brand-tagline {
+  font-size: 0.82rem;
+  color: rgba(239, 233, 223, 0.86);
+  line-height: 1.7;
+}
+
+.site-footer--static .footer-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.site-footer--static .footer-academy-main-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.34rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.18);
+  border: 1px solid #D4AF37;
+  color: #F6E59B;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.site-footer--static .footer-academy-main-link:hover {
+  background: #D4AF37;
+  color: #142220;
+}
+
+.site-footer--static .footer-brandbook-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.34rem 0.85rem;
+  border-radius: 999px;
+  background: rgba(14, 147, 157, 0.24);
+  border: 1px solid rgba(14, 147, 157, 0.75);
+  color: #E7F7F8;
+  font-size: 0.74rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.site-footer--static .footer-brandbook-link:hover {
+  background: #0E939D;
+  border-color: #D4AF37;
+  color: #FFFDF5;
+}
+
+.site-footer--static .footer-links-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.site-footer--static .footer-col-heading {
+  font-size: 0.84rem;
+  font-weight: 800;
+  color: #F6E59B;
+  margin-bottom: 0.15rem;
+}
+
+.site-footer--static .footer-nav-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  padding: 0;
+  margin: 0;
+}
+
+.site-footer--static .footer-jump-btn {
+  display: inline-block;
+  text-decoration: none;
+  color: rgba(239, 233, 223, 0.84);
+  font-size: 0.78rem;
+  font-weight: 600;
+  transition: color 0.2s ease;
+}
+
+.site-footer--static .footer-jump-btn:hover {
+  color: #D4AF37;
+}
+
+.site-footer--static .footer-brandbook-nav-link {
+  color: #F6E59B;
+  font-weight: 700;
+}
+
+.site-footer--static .footer-social-col {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.site-footer--static .footer-gold-social-label {
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.22rem 0.74rem;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #D4AF37 0%, #F3DC8B 100%);
+  color: #142220;
+  font-size: 0.74rem;
+  font-weight: 800;
+}
+
+.site-footer--static .footer-social-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.42rem;
+}
+
+.site-footer--static .footer-social-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.38rem;
+  padding: 0.32rem 0.65rem;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(212, 175, 55, 0.42);
+  color: #EFE9DF;
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.site-footer--static .footer-social-pill:hover {
+  background: rgba(212, 175, 55, 0.24);
+  border-color: #D4AF37;
+  color: #F6E59B;
+}
+
+.site-footer--static .social-gold-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #D4AF37;
+  flex-shrink: 0;
+}
+
+.site-footer--static .footer-bottom-bar {
+  border-top: 1px solid rgba(212, 175, 55, 0.22);
+  padding-top: 0.75rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  font-size: 0.74rem;
+  color: rgba(239, 233, 223, 0.75);
+}
+
+.site-footer--static .footer-legal-credits {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+}
+
+.site-footer--static .vortex-copyright-text strong {
+  color: #D4AF37;
+}
+
+.site-footer--static .vortex-studio-link {
+  color: #F6E59B;
+  font-weight: 800;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.site-footer--static .footer-github-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.18rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.55);
+  color: #F6E59B;
+  font-size: 0.7rem;
+  font-weight: 800;
+  text-decoration: none;
+  direction: ltr;
+}
+
+.site-footer--static .footer-back-top {
+  background: rgba(212, 175, 55, 0.16);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #F6E59B;
+  border-radius: 999px;
+  padding: 0.28rem 0.85rem;
+  font-family: inherit;
+  font-size: 0.74rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.site-footer--static .footer-back-top:hover {
+  background: #D4AF37;
+  color: #182422;
+}
+
+@media (max-width: 900px) {
+  .site-footer--static .footer-top-row {
+    grid-template-columns: 1fr;
+    gap: 1.1rem;
+  }
+}

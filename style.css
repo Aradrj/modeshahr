@@ -2711,3 +2711,55 @@ body {
   background: transparent !important;
   filter: none !important;
 }
+
+/* دکمه و لینک برندبوک رسمی در فوتر سایت (نمایش در دسکتاپ و موبایل) */
+.footer-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.45rem;
+  margin-top: 0.15rem;
+}
+
+.footer-cta-row .footer-academy-main-link {
+  margin-top: 0;
+}
+
+.footer-brandbook-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.28rem 0.78rem;
+  border-radius: 999px;
+  background: rgba(14, 147, 157, 0.24);
+  border: 1px solid rgba(14, 147, 157, 0.75);
+  color: #E7F7F8;
+  font-size: 0.72rem;
+  font-weight: 800;
+  text-decoration: none;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.footer-brandbook-link:hover {
+  background: #0E939D;
+  border-color: #D4AF37;
+  color: #FFFDF5;
+}
+
+.footer-brandbook-nav-link {
+  display: inline-block;
+  text-decoration: none;
+  color: #F6E59B !important;
+  font-weight: 700;
+}
+
+.footer-brandbook-nav-link:hover {
+  color: #D4AF37 !important;
+}
+
+@media (max-aspect-ratio: 1/1), (max-width: 860px) {
+  .footer-brandbook-link {
+    font-size: 0.62rem;
+    padding: 0.2rem 0.58rem;
+  }
+}
